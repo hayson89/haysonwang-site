@@ -1,8 +1,6 @@
+<img src="image/hayson.png" alt="Hayson Wang" width="299">
 
-
-<img title="" src="file:///E:/Website/quartz/content/image/hayson.png" alt="" width="299">
-
-医科大学第一附属医院，手足踝外科，主治医师。
+## 医科大学第一附属医院，手足踝外科，主治医师。
 
 - 日常工作处理手足部常见急诊外伤的治疗（肘关节骨折，桡骨远端骨折，掌指骨骨折，踝关节和足部骨折，手足神经、血管、肌腱损伤、跟腱断裂）。
 
