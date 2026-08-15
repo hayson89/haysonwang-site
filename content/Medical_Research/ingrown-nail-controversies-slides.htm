@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>嵌甲治疗的争议 — 科室小讲课</title>
+<style>
+/* ===== CSS Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #0A2540;
+  --blue: #1B3A5C;
+  --clinical: #2E86AB;
+  --red: #C62828;
+  --green: #2E7D32;
+  --amber: #E65100;
+  --light: #F1F5F9;
+  --lightGray: #ECEFF1;
+  --gray: #546E7A;
+  --muted: #78909C;
+  --body: #37474F;
+  --white: #FFFFFF;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", "Calibri", sans-serif;
+  background: var(--navy);
+  overflow: hidden;
+  color: var(--body);
+}
+
+/* ===== Slide Deck Container ===== */
+#deck {
+  width: 100vw; height: 100vh;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.slide {
+  position: absolute;
+  width: 100%; height: 100%;
+  display: none;
+  flex-direction: column;
+  background: var(--light);
+  overflow: hidden;
+  padding: 0;
+}
+
+.slide.active { display: flex; }
+
+/* ===== Common Elements ===== */
+.top-bar {
+  width: 100%; height: 6px;
+  background: var(--clinical);
+  flex-shrink: 0;
+}
+
+.slide-title {
+  font-size: 2rem; font-weight: 800;
+  color: var(--navy);
+  padding: 20px 48px 8px;
+  flex-shrink: 0;
+}
+
+.slide-content {
+  flex: 1; display: flex; flex-direction: column;
+  padding: 8px 48px 40px;
+  min-height: 0;
+}
+
+.footer {
+  position: absolute;
+  bottom: 12px; left: 48px; right: 48px;
+  display: flex; justify-content: space-between;
+  font-size: 0.72rem; color: var(--muted);
+  pointer-events: none;
+}
+
+/* ===== Title Slide ===== */
+.title-slide {
+  background: var(--navy);
+  color: var(--white);
+  align-items: flex-start;
+  justify-content: center;
+}
+.title-slide .slide-content { padding: 0 80px; }
+.title-slide h1 {
+  font-size: 3rem; font-weight: 800;
+  margin-bottom: 12px;
+  color: var(--white);
+}
+.title-slide .subtitle {
+  font-size: 1.3rem; color: var(--clinical);
+  font-style: italic; margin-bottom: 32px;
+}
+.title-slide .source { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+.title-slide .source strong { color: var(--white); }
+.title-slide .accent-line {
+  width: 120px; height: 4px;
+  background: var(--clinical);
+  margin-bottom: 20px;
+}
+.title-slide .presenter {
+  font-size: 0.95rem; color: var(--muted);
+  margin-top: 12px;
+}
+
+/* ===== Card ===== */
+.card {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid var(--lightGray);
+  padding: 16px 20px;
+}
+.card-header {
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 6px;
+  margin: -16px -20px 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ===== Two Column ===== */
+.two-col { display: flex; gap: 20px; flex: 1; min-height: 0; }
+.two-col > * { flex: 1; }
+.col-narrow { flex: 0.8; }
+.col-wide { flex: 1.4; }
+
+/* ===== Lists ===== */
+ul.bullet { list-style: none; }
+ul.bullet li {
+  padding: 4px 0 4px 18px;
+  position: relative;
+  font-size: 0.82rem; line-height: 1.5;
+  color: var(--body);
+}
+ul.bullet li::before {
+  content: "▸"; position: absolute; left: 0;
+  color: var(--clinical); font-size: 0.8rem;
+}
+
+/* ===== Table ===== */
+table.data {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.78rem;
+  border-radius: 6px; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+table.data th {
+  background: var(--blue); color: var(--white);
+  padding: 8px 12px; text-align: left;
+  font-weight: 700;
+}
+table.data td {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--lightGray);
+  color: var(--body);
+}
+table.data tr:nth-child(even) td { background: #FAFBFC; }
+
+/* ===== Highlight Banner ===== */
+.banner {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.85rem; font-weight: 600;
+  text-align: center;
+  margin: 8px 0;
+}
+.banner-red { background: var(--red); color: var(--white); }
+.banner-green { background: var(--green); color: var(--white); }
+.banner-navy { background: var(--navy); color: var(--white); }
+.banner-amber { background: var(--amber); color: var(--white); }
+.banner-gray { background: var(--lightGray); color: var(--navy); }
+
+/* ===== Number Circle ===== */
+.num-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  font-weight: 800; font-size: 0.8rem;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+/* ===== Grid Layout ===== */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; }
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+
+/* ===== Stat Box ===== */
+.stat-box {
+  text-align: center;
+  padding: 12px;
+  border-radius: 6px;
+  background: var(--white);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.stat-num {
+  font-size: 1.6rem; font-weight: 800;
+  color: var(--clinical);
+}
+.stat-label {
+  font-size: 0.7rem; color: var(--gray);
+  margin-top: 4px;
+}
+
+/* ===== Navigation ===== */
+#nav {
+  position: fixed;
+  bottom: 16px; right: 24px;
+  display: flex; align-items: center; gap: 12px;
+  z-index: 100;
+  background: rgba(10,37,64,0.85);
+  padding: 6px 16px;
+  border-radius: 24px;
+  color: var(--white);
+  font-size: 0.8rem;
+}
+#nav button {
+  background: none; border: none;
+  color: var(--white);
+  font-size: 1rem; cursor: pointer;
+  padding: 4px 8px; border-radius: 4px;
+  transition: background 0.2s;
+}
+#nav button:hover { background: rgba(255,255,255,0.2); }
+#counter { min-width: 50px; text-align: center; }
+
+/* ===== Progress Bar ===== */
+#progress {
+  position: fixed;
+  top: 0; left: 0; height: 3px;
+  background: var(--clinical);
+  z-index: 1000;
+  transition: width 0.3s;
+}
+
+/* ===== TOC ===== */
+.toc-item {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--white);
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  border-left: 4px solid var(--clinical);
+}
+.toc-num {
+  font-size: 1.1rem; font-weight: 800;
+  color: var(--clinical);
+  min-width: 32px;
+}
+.toc-text { flex: 1; }
+.toc-title { font-size: 0.88rem; font-weight: 700; color: var(--navy); }
+.toc-desc { font-size: 0.72rem; color: var(--gray); }
+
+/* ===== Flow Steps ===== */
+.flow-step {
+  background: var(--white);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  position: relative;
+}
+.flow-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  font-weight: 800; font-size: 1rem;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.flow-title { font-size: 0.82rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.flow-desc { font-size: 0.68rem; color: var(--gray); line-height: 1.4; }
+.flow-arrow {
+  position: absolute;
+  right: -18px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem; color: var(--clinical);
+  z-index: 1;
+}
+
+/* ===== Bar Chart (CSS) ===== */
+.chart-bar {
+  display: flex; align-items: flex-end;
+  gap: 24px; height: 180px;
+  padding: 12px 0;
+}
+.bar-item { flex: 1; display: flex; flex-direction: column; align-items: center; }
+.bar {
+  width: 60px; border-radius: 4px 4px 0 0;
+  position: relative;
+  transition: height 0.5s;
+}
+.bar-label { font-size: 0.72rem; color: var(--gray); margin-top: 6px; }
+.bar-value {
+  position: absolute;
+  top: -22px; left: 50%; transform: translateX(-50%);
+  font-size: 0.82rem; font-weight: 700; color: var(--navy);
+}
+
+/* ===== Tags ===== */
+.tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.68rem; font-weight: 600;
+}
+.tag-red { background: #FFEBEE; color: var(--red); }
+.tag-green { background: #E8F5E9; color: var(--green); }
+.tag-amber { background: #FFF3E0; color: var(--amber); }
+.tag-blue { background: #E3F2FD; color: var(--clinical); }
+
+/* ===== Left Accent ===== */
+.left-accent { border-left: 4px solid var(--clinical); }
+
+/* ===== Animations ===== */
+.slide.active .slide-content > * {
+  animation: fadeInUp 0.4s ease-out both;
+}
+.slide.active .slide-content > *:nth-child(1) { animation-delay: 0.05s; }
+.slide.active .slide-content > *:nth-child(2) { animation-delay: 0.1s; }
+.slide.active .slide-content > *:nth-child(3) { animation-delay: 0.15s; }
+.slide.active .slide-content > *:nth-child(4) { animation-delay: 0.2s; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Print ===== */
+@media print {
+  .slide { display: flex !important; page-break-after: always; position: relative; }
+  #nav, #progress { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress" style="width: 0%"></div>
+<div id="deck">
+
+<!-- ==================== SLIDE 1: TITLE ==================== -->
+<div class="slide title-slide active">
+  <div class="top-bar"></div>
+  <div class="slide-content" style="justify-content: center;">
+    <h1>嵌甲治疗的争议</h1>
+    <p class="subtitle">Controversies in the Treatment of Ingrown Nails</p>
+    <div class="accent-line"></div>
+    <div class="source">
+      <strong>文献来源</strong>：Haneke E.<br>
+      Dermatology Research and Practice, 2012, Volume 2012, Article ID 783924<br>
+      DOI: 10.1155/2012/783924
+    </div>
+    <p class="presenter">科室内部小讲课</p>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 2: OUTLINE ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">目 录</div>
+  <div class="slide-content">
+    <div class="toc-item"><span class="toc-num">01</span><div class="toc-text"><div class="toc-title">疾病背景与病理机制</div><div class="toc-desc">流行病学、诱发因素、恶性循环</div></div></div>
+    <div class="toc-item"><span class="toc-num">02</span><div class="toc-text"><div class="toc-title">术语争议与分型</div><div class="toc-desc">unguis incarnatus vs onychocryptosis</div></div></div>
+    <div class="toc-item"><span class="toc-num">03</span><div class="toc-text"><div class="toc-title">保守治疗</div><div class="toc-desc">胶带、棉塞、沟槽、甲矫正器、抗生素争议</div></div></div>
+    <div class="toc-item"><span class="toc-num">04</span><div class="toc-text"><div class="toc-title">手术治疗</div><div class="toc-desc">拔甲、楔形切除、甲襞成形、基质角切除</div></div></div>
+    <div class="toc-item"><span class="toc-num">05</span><div class="toc-text"><div class="toc-title">化学烧灼与激光</div><div class="toc-desc">苯酚、NaOH、TCA、CO₂激光</div></div></div>
+    <div class="toc-item"><span class="toc-num">06</span><div class="toc-text"><div class="toc-title">复发率汇总与争议焦点</div><div class="toc-desc">各方法对比、九大争议</div></div></div>
+    <div class="toc-item"><span class="toc-num">07</span><div class="toc-text"><div class="toc-title">临床思考与结论</div><div class="toc-desc">对临床实践的启示</div></div></div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>2</span></div>
+</div>
+
+<!-- ==================== SLIDE 3: BACKGROUND ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">疾病背景</div>
+  <div class="slide-content">
+    <div class="two-col">
+      <div class="card left-accent">
+        <div style="font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 12px;">疾病概述</div>
+        <ul class="bullet">
+          <li>嵌甲是<strong>青少年最常见的甲病</strong>之一</li>
+          <li>可见于任何年龄段</li>
+          <li>日常活动受限，伴明显不适和疼痛</li>
+          <li>治疗常令患者沮丧</li>
+          <li>可能伴永久性趾甲和脚趾畸形</li>
+          <li>超过 <strong>1000年</strong> 来多种治疗方法被提出</li>
+        </ul>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--amber);">
+        <div style="font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 12px;">诱发因素</div>
+        <ul class="bullet" style="--clinical: var(--amber);">
+          <li>尖头窄鞋</li>
+          <li>紧袜</li>
+          <li>多汗症（hyperhidrosis）</li>
+          <li>青少年糖尿病</li>
+          <li>其他因素</li>
+        </ul>
+        <div class="banner banner-gray" style="margin-top: 16px; font-size: 0.78rem;">
+          行走时足趾承受体重 <strong>2-2.5倍</strong> 的压力
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>3</span></div>
+</div>
+
+<!-- ==================== SLIDE 4: PATHOGENESIS ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">病理机制 — 恶性循环</div>
+  <div class="slide-content">
+    <div class="grid-5" style="flex: 1; align-items: stretch;">
+      <div class="flow-step">
+        <div class="flow-num" style="background: var(--clinical);">1</div>
+        <div class="flow-title">斜剪甲角</div>
+        <div class="flow-desc">远端外侧角被斜向剪断<br>残留微小刺状突起(spicule)</div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background: var(--amber);">2</div>
+        <div class="flow-title">刺入甲沟</div>
+        <div class="flow-desc">spicule向前生长<br>刺入外侧甲沟，穿透表皮</div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background: var(--red);">3</div>
+        <div class="flow-title">异物反应</div>
+        <div class="flow-desc">炎症 → 肉芽组织<br>→ 细菌定植 → 感染</div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background: var(--amber);">4</div>
+        <div class="flow-title">疼痛修剪</div>
+        <div class="flow-desc">患者为缓解疼痛自行修剪<br>但因疼痛无法剪到位</div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background: var(--red);">5</div>
+        <div class="flow-title">残留钩状甲片</div>
+        <div class="flow-desc">外侧残留钩状甲片<br>向外生长时再次钩入甲沟</div>
+      </div>
+    </div>
+    <div class="banner banner-red" style="margin-top: 16px;">
+      ↻ 恶性循环：疼痛 → 修剪 → 残留钩甲 → 再次嵌入 → 疼痛加重
+    </div>
+    <div style="text-align: center; font-size: 0.82rem; color: var(--gray); margin-top: 8px; font-style: italic;">
+      最常见类型：远端外侧嵌生（distal-lateral ingrowing）
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>4</span></div>
+</div>
+
+<!-- ==================== SLIDE 5: TERMINOLOGY ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">术语争议</div>
+  <div class="slide-content">
+    <div class="two-col">
+      <div class="card" style="overflow: hidden;">
+        <div class="card-header" style="background: var(--clinical);">unguis incarnatus</div>
+        <ul class="bullet">
+          <li>多数医师使用此命名</li>
+          <li>认为<strong>甲板</strong>是病因</li>
+          <li>ingrown / ingrowing nail</li>
+        </ul>
+        <div style="text-align: center; font-size: 0.88rem; color: var(--clinical); font-weight: 700; font-style: italic; margin-top: 16px; padding: 8px; background: #E3F2FD; border-radius: 4px;">
+          "甲板嵌入软组织"
+        </div>
+      </div>
+      <div class="card" style="overflow: hidden;">
+        <div class="card-header" style="background: var(--amber);">onychocryptosis</div>
+        <ul class="bullet">
+          <li>另一派坚持此命名</li>
+          <li>认为甲仅被<strong>肥大的外侧甲襞</strong>覆盖</li>
+          <li>强调软组织肥厚是主要问题</li>
+        </ul>
+        <div style="text-align: center; font-size: 0.88rem; color: var(--amber); font-weight: 700; font-style: italic; margin-top: 16px; padding: 8px; background: #FFF3E0; border-radius: 4px;">
+          "甲被隐藏在肥大组织中"
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center; font-size: 0.82rem; color: var(--gray); margin-top: 16px; font-style: italic;">
+      两种命名反映了不同的病因学观点，也影响了治疗策略的选择
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>5</span></div>
+</div>
+
+<!-- ==================== SLIDE 6: TREATMENT OVERVIEW ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">治疗方法总览</div>
+  <div class="slide-content">
+    <div class="two-col">
+      <div class="card" style="overflow: hidden;">
+        <div class="card-header" style="background: var(--green);">保守治疗</div>
+        <ul class="bullet">
+          <li>胶带牵引（Taping）</li>
+          <li>棉塞填塞（Packing）</li>
+          <li>沟槽治疗（Gutter Treatment）</li>
+          <li>甲矫正器 / 甲支具（Nail Braces）</li>
+          <li>甲熨压（Nail Ironing）</li>
+          <li>抗生素（Antibiotics）</li>
+          <li>卫生措施（Hygienic Measures）</li>
+        </ul>
+      </div>
+      <div class="card" style="overflow: hidden;">
+        <div class="card-header" style="background: var(--blue);">手术治疗</div>
+        <ul class="bullet">
+          <li>拔甲术（Nail Avulsion）</li>
+          <li>楔形切除术（Wedge Excisions）</li>
+          <li>外侧甲襞切除 / 成形</li>
+          <li>甲床切除术（Zadik手术）</li>
+          <li>趾端截断（Terminal Syme）</li>
+          <li>选择性甲基质角切除</li>
+          <li>化学烧灼（苯酚 / NaOH / TCA）</li>
+          <li>电灼 & 激光（CO₂ / Er:YAG）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>6</span></div>
+</div>
+
+<!-- ==================== SLIDE 7: CONSERVATIVE 1 ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">保守治疗（一）：胶带 · 棉塞 · 沟槽</div>
+  <div class="slide-content">
+    <div class="grid-3" style="flex: 1;">
+      <div class="card" style="overflow: hidden;">
+        <div class="card-header" style="background: var(--clinical);">胶带牵引 Taping</div>
+        <ul class="bullet">
+          <li>最温和的方法</li>
+          <li>胶带牵拉外侧甲襞远离嵌甲</li>
+          <li>弹性胶带15-20mm宽、5cm长</li>
+          <li>斜向近端贴于趾腹</li>
+          <li>可加用锚定胶带</li>
+          <li>局限：肉芽组织时难以粘贴</li>
+        </ul>
+      </div>
+      <div class="card" style="overflow: hidden;">
+        <div class="card-header" style="background: var(--green);">棉塞填塞 Packing</div>
+        <ul class="bullet">
+          <li>小棉絮置于嵌甲外侧角下方</li>
+          <li>使甲板远离甲沟</li>
+          <li>需患者良好配合</li>
+          <li>定期更换</li>
+          <li>可与胶带牵引联合使用</li>
+        </ul>
+      </div>
+      <div class="card" style="overflow: hidden;">
+        <div class="card-header" style="background: var(--amber);">沟槽治疗 Gutter</div>
+        <ul class="bullet">
+          <li>塑料沟槽管或可塑丙烯酸</li>
+          <li>包裹嵌甲边缘</li>
+          <li>将甲边缘与软组织隔开</li>
+          <li>有效但需耐心和技巧</li>
+          <li>适合轻度病例</li>
+        </ul>
+      </div>
+    </div>
+    <div style="text-align: center; font-size: 0.82rem; color: var(--gray); margin-top: 12px; font-style: italic;">
+      适用人群：轻度病例 · 需要患者良好依从性和医师经验
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>7</span></div>
+</div>
+
+<!-- ==================== SLIDE 8: NAIL BRACES ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">保守治疗（二）：甲矫正器 / 甲支具</div>
+  <div class="slide-content">
+    <div class="two-col">
+      <div class="card col-wide left-accent">
+        <div style="font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 10px;">Orthonyxia — Nail Braces</div>
+        <ul class="bullet">
+          <li><strong>钢丝材质</strong>：跨甲背面，挂钩于外侧缘下方，通过收紧矫正曲度</li>
+          <li><strong>塑料带材质</strong>：利用记忆特性温和展平甲板</li>
+          <li><strong>形状记忆合金</strong>：铜铝锰合金（Cu-Al-Mn）</li>
+          <li><strong>超弹性钢丝</strong>：同样可展平甲板</li>
+          <li><strong>甲熨压（Nail Ironing）</strong>：用热止血钳夹持展平甲板</li>
+        </ul>
+      </div>
+      <div class="card col-narrow" style="background: var(--navy); color: var(--white);">
+        <div style="font-size: 1.05rem; font-weight: 700; margin-bottom: 12px;">适用范围</div>
+        <ul class="bullet" style="--clinical: #4FC3F7;">
+          <li style="color: var(--white);">轻中度嵌甲</li>
+          <li style="color: var(--white);">不愿手术的患者</li>
+          <li style="color: var(--white);">手术禁忌者</li>
+          <li style="color: var(--white);">需持续治疗</li>
+          <li style="color: var(--white);">包括Omega钢丝等物理矫正装置</li>
+        </ul>
+        <div class="banner banner-green" style="margin-top: 16px; font-size: 0.82rem;">
+          良好应用前景
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>8</span></div>
+</div>
+
+<!-- ==================== SLIDE 9: ANTIBIOTICS ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">抗生素争议</div>
+  <div class="slide-content">
+    <div class="card" style="border-left: 4px solid var(--red); margin-bottom: 16px;">
+      <div style="font-size: 1rem; font-weight: 700; color: var(--red); margin-bottom: 10px;">作者观点</div>
+      <div style="font-size: 1.1rem; font-weight: 700; color: var(--red); margin-bottom: 10px;">
+        抗生素几乎总是资源的浪费
+      </div>
+      <ul class="bullet">
+        <li>嵌入软组织的甲是炎症和肉芽组织的根源</li>
+        <li>没有任何甲对哪怕最强大的抗生素敏感</li>
+        <li><strong style="color: var(--navy);">去除病因（嵌甲）才是治疗的关键</strong></li>
+      </ul>
+    </div>
+    <div class="card" style="border-left: 4px solid var(--amber); margin-bottom: 16px;">
+      <div style="font-size: 1rem; font-weight: 700; color: var(--amber); margin-bottom: 10px;">例外情况</div>
+      <ul class="bullet">
+        <li>使用冷刀手术（尤其楔形切除）穿过严重污染区域时</li>
+        <li>预防性抗生素可能有一定合理性</li>
+      </ul>
+    </div>
+    <div class="banner banner-navy">
+      临床反思：国内嵌甲治疗中抗生素滥用现象普遍，炎症根源是嵌入的甲板而非细菌
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>9</span></div>
+</div>
+
+<!-- ==================== SLIDE 10: SURGICAL OVERVIEW ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">手术治疗：两种根本思路</div>
+  <div class="slide-content">
+    <div class="two-col" style="margin-bottom: 16px;">
+      <div class="card" style="overflow: hidden;">
+        <div class="card-header" style="background: var(--amber);">思路一：软组织是病因</div>
+        <ul class="bullet">
+          <li>切除软组织，使甲无 substrate 可嵌入</li>
+          <li><strong>代表术式：</strong></li>
+          <li style="padding-left: 36px;">Vandenbos法、Noël法、Howard法</li>
+          <li style="padding-left: 36px;">DuVries法、Ney法、超级U法</li>
+        </ul>
+      </div>
+      <div class="card" style="overflow: hidden;">
+        <div class="card-header" style="background: var(--green);">思路二：甲板/基质是病因</div>
+        <ul class="bullet">
+          <li>宽甲与窄甲床不匹配是核心问题</li>
+          <li>治疗靶点：<strong>外侧甲基质角</strong></li>
+          <li><strong>代表术式：</strong></li>
+          <li style="padding-left: 36px;">选择性基质角切除、苯酚烧灼</li>
+          <li style="padding-left: 36px;">NaOH/TCA化学烧灼、CO₂激光</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="border-left: 4px solid var(--red);">
+      <div style="font-size: 0.95rem; font-weight: 700; color: var(--red); margin-bottom: 10px;">已过时 / 不推荐的方法</div>
+      <div class="grid-4">
+        <div><span class="tag tag-red">拔甲术</span><div style="font-size: 0.72rem; color: var(--gray); margin-top: 4px;">几乎100%复发，有害无益</div></div>
+        <div><span class="tag tag-red">楔形切除术</span><div style="font-size: 0.72rem; color: var(--gray); margin-top: 4px;">高复发、高病痛、美观差</div></div>
+        <div><span class="tag tag-red">Zadik手术</span><div style="font-size: 0.72rem; color: var(--gray); margin-top: 4px;">复发率60.5%，过于激进</div></div>
+        <div><span class="tag tag-red">Terminal Syme</span><div style="font-size: 0.72rem; color: var(--gray); margin-top: 4px;">致残性，球状畸形</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>10</span></div>
+</div>
+
+<!-- ==================== SLIDE 11: NAIL AVULSION ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">拔甲术（Nail Avulsion）— 强烈反对</div>
+  <div class="slide-content">
+    <div class="banner banner-red" style="font-size: 1rem; margin-bottom: 16px;">
+      拔甲对嵌甲治疗不仅无用，而且几乎总是有害的
+    </div>
+    <div class="grid-2" style="flex: 1;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div class="card" style="display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px;">
+          <div class="num-circle" style="background: var(--red); margin-top: 2px;">1</div>
+          <div><strong style="color: var(--navy);">甲再生后宽度不变</strong><div style="font-size: 0.75rem; color: var(--gray); margin-top: 2px;">再生的甲板仍与术前等宽，会再次嵌入</div></div>
+        </div>
+        <div class="card" style="display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px;">
+          <div class="num-circle" style="background: var(--red); margin-top: 2px;">2</div>
+          <div><strong style="color: var(--navy);">甲床收缩</strong><div style="font-size: 0.75rem; color: var(--gray); margin-top: 2px;">拔甲期间甲床纵向及横向收缩，导致远端甲壁假性形成</div></div>
+        </div>
+        <div class="card" style="display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px;">
+          <div class="num-circle" style="background: var(--red); margin-top: 2px;">3</div>
+          <div><strong style="color: var(--navy);">趾尖承受全身体重</strong><div style="font-size: 0.75rem; color: var(--gray); margin-top: 2px;">行走时达体重2-2.5倍，趾腹远端脱位</div></div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div class="card" style="display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px;">
+          <div class="num-circle" style="background: var(--red); margin-top: 2px;">4</div>
+          <div><strong style="color: var(--navy);">远端甲壁形成</strong><div style="font-size: 0.75rem; color: var(--gray); margin-top: 2px;">甲板无法越过，甲持续增厚、变黄、浑浊伴甲分离</div></div>
+        </div>
+        <div class="card" style="display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px;">
+          <div class="num-circle" style="background: var(--red); margin-top: 2px;">5</div>
+          <div><strong style="color: var(--navy);">显著术后病痛</strong><div style="font-size: 0.75rem; color: var(--gray); margin-top: 2px;">造成明显的术后疼痛和功能障碍</div></div>
+        </div>
+        <div class="card" style="display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px;">
+          <div class="num-circle" style="background: var(--red); margin-top: 2px;">6</div>
+          <div><strong style="color: var(--navy);">几乎必然复发</strong><div style="font-size: 0.75rem; color: var(--gray); margin-top: 2px;">有患者经历六次拔甲仍复发</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>11</span></div>
+</div>
+
+<!-- ==================== SLIDE 12: WEDGE EXCISION ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">楔形切除术 — 已过时（Obsolete）</div>
+  <div class="slide-content">
+    <div class="banner banner-red" style="margin-bottom: 16px;">
+      包括 Baudens' / Emmert's / Kocher's / Watson-Cheynes' / McWilliams' 等术式 — 不再推荐
+    </div>
+    <div class="grid-4" style="flex: 1;">
+      <div class="card" style="text-align: center; overflow: hidden; padding: 0;">
+        <div style="background: var(--red); color: var(--white); font-size: 1.4rem; font-weight: 800; padding: 14px;">高</div>
+        <div style="padding: 12px;">
+          <div style="font-weight: 700; color: var(--navy); margin-bottom: 6px;">高复发率</div>
+          <div style="font-size: 0.75rem; color: var(--gray);">文献报道复发率差异大，反映术者经验水平不同</div>
+        </div>
+      </div>
+      <div class="card" style="text-align: center; overflow: hidden; padding: 0;">
+        <div style="background: var(--amber); color: var(--white); font-size: 1.4rem; font-weight: 800; padding: 14px;">3-6周</div>
+        <div style="padding: 12px;">
+          <div style="font-weight: 700; color: var(--navy); margin-bottom: 6px;">高病痛率</div>
+          <div style="font-size: 0.75rem; color: var(--gray);">伤口愈合需3-6周，术后疼痛明显</div>
+        </div>
+      </div>
+      <div class="card" style="text-align: center; overflow: hidden; padding: 0;">
+        <div style="background: var(--red); color: var(--white); font-size: 1.4rem; font-weight: 800; padding: 14px;">畸形</div>
+        <div style="padding: 12px;">
+          <div style="font-weight: 700; color: var(--navy); margin-bottom: 6px;">美观差</div>
+          <div style="font-size: 0.75rem; color: var(--gray);">甲襞被切除，甲变窄、扭曲、甲分离、增厚、变色、偏斜</div>
+        </div>
+      </div>
+      <div class="card" style="text-align: center; overflow: hidden; padding: 0;">
+        <div style="background: var(--red); color: var(--white); font-size: 1.4rem; font-weight: 800; padding: 14px;">严重</div>
+        <div style="padding: 12px;">
+          <div style="font-weight: 700; color: var(--navy); margin-bottom: 6px;">并发症多</div>
+          <div style="font-size: 0.75rem; color: var(--gray);">感染、真菌败血症、趾坏死（止血带遗漏所致）</div>
+        </div>
+      </div>
+    </div>
+    <div class="banner banner-gray" style="margin-top: 12px;">
+      病例报告：10岁男孩Kocher楔形切除后趾坏死；38岁女性双侧楔形切除16年后甲营养不良、畸形
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>12</span></div>
+</div>
+
+<!-- ==================== SLIDE 13: LATERAL FOLD TECHNIQUES ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">外侧甲襞切除与成形</div>
+  <div class="slide-content">
+    <table class="data">
+      <thead>
+        <tr><th>术式</th><th>方法</th><th>是否触及甲板/基质</th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="font-weight: 700; color: var(--navy);">梭形切除法</td><td>切除梭形皮肤，缝合牵拉甲襞向外</td><td style="text-align: center;"><span class="tag tag-green">不触及</span></td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">Vandenbos法</td><td>大块切除外侧甲襞至骨面，1.5×3cm缺损二期愈合</td><td style="text-align: center;"><span class="tag tag-green">不触及</span></td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">Noël法</td><td>类似Vandenbos，从甲壁到近端甲襞切除</td><td style="text-align: center;"><span class="tag tag-green">不触及</span></td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">DuVries法</td><td>广泛切除甲壁和皮下脂肪，皮肤直接缝合于甲床</td><td style="text-align: center;"><span class="tag tag-amber">触及甲床</span></td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">Ney法</td><td>大范围软组织切除</td><td style="text-align: center;"><span class="tag tag-green">不触及甲板</span></td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">Perez Rosa 超级U</td><td>双侧甲襞+远端软组织切除，U形伤口</td><td style="text-align: center;"><span class="tag tag-green">不触及</span></td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">Howard法</td><td>沿甲下缘平行切开半月形软组织</td><td style="text-align: center;"><span class="tag tag-green">不触及甲板</span></td></tr>
+      </tbody>
+    </table>
+    <div class="banner banner-navy" style="margin-top: 12px;">
+      优势：不触及甲板和基质，在甲襞肥厚明显的病例中有独特价值，可作为苯酚法的补充
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>13</span></div>
+</div>
+
+<!-- ==================== SLIDE 14: SEGMENTAL MATRIX EXCISION ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">选择性外侧甲基质角切除</div>
+  <div class="slide-content">
+    <div class="two-col">
+      <div class="card col-wide left-accent" style="border-left-color: var(--green);">
+        <div style="font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 10px;">Surgical Segmental Matrix Excision</div>
+        <ul class="bullet">
+          <li><strong style="color: var(--green);">作者推崇的手术方式之一</strong></li>
+          <li>微创，尊重嵌甲病因病理学</li>
+          <li>甲板宽度缩窄，治愈率高</li>
+          <li>愈合通常 <strong>&lt; 10天</strong></li>
+        </ul>
+        <div style="font-size: 0.85rem; font-weight: 700; color: var(--navy); margin-top: 12px; margin-bottom: 4px;">操作要点：</div>
+        <ul class="bullet" style="--clinical: var(--navy);">
+          <li>甲板分离 → 切至甲上皮下方</li>
+          <li>斜切口翻起甲襞，暴露深部基质角</li>
+          <li>基质角+约2mm相邻甲床从骨面分离</li>
+        </ul>
+        <div style="font-size: 0.85rem; font-weight: 700; color: var(--red); margin-top: 12px; margin-bottom: 4px;">关键难点：</div>
+        <ul class="bullet" style="--clinical: var(--red);">
+          <li>甲基质最近端外侧角通常很深</li>
+          <li>可用注射针定位 / 亚甲蓝染色辅助</li>
+        </ul>
+      </div>
+      <div class="card col-narrow" style="background: var(--navy); color: var(--white); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <div style="font-size: 1.05rem; font-weight: 700; margin-bottom: 20px;">核心优势</div>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #4FC3F7;">&lt;10天</div>
+        <div style="font-size: 0.75rem; color: var(--muted); margin-bottom: 16px;">愈合时间</div>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #4FC3F7;">高</div>
+        <div style="font-size: 0.75rem; color: var(--muted); margin-bottom: 16px;">治愈率</div>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #4FC3F7;">微创</div>
+        <div style="font-size: 0.75rem; color: var(--muted); margin-bottom: 16px;">手术方式</div>
+        <div class="banner banner-green" style="font-size: 0.82rem;">
+          手术首选 · 关键在根治性
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>14</span></div>
+</div>
+
+<!-- ==================== SLIDE 15: PHENOL ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">苯酚甲基质烧灼 — 当前首选方法</div>
+  <div class="slide-content">
+    <div class="banner banner-green" style="font-size: 0.95rem; margin-bottom: 16px;">
+      技术极其简单 · 安全 · 复发率 &lt; 1-2% · 最常用
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div style="font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 12px;">苯酚三大优势</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="num-circle" style="background: var(--green);">1</div>
+            <div><strong style="color: var(--navy);">化学烧灼</strong><div style="font-size: 0.72rem; color: var(--gray);">蛋白凝固作用</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="num-circle" style="background: var(--green);">2</div>
+            <div><strong style="color: var(--navy);">强效消毒</strong><div style="font-size: 0.72rem; color: var(--gray);">降低感染风险</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="num-circle" style="background: var(--green);">3</div>
+            <div><strong style="color: var(--navy);">局部麻醉</strong><div style="font-size: 0.72rem; color: var(--gray);">减轻术后疼痛</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card left-accent">
+        <div style="font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 12px;">操作步骤</div>
+        <ol style="font-size: 0.78rem; color: var(--body); line-height: 1.8; padding-left: 20px;">
+          <li>配制液化苯酚：100g结晶 + 9.1mL蒸馏水，45°C水浴</li>
+          <li>局麻下拔除嵌甲条</li>
+          <li>止血带下干燥创面</li>
+          <li>棉签蘸液化苯酚涂擦外侧甲基质角</li>
+          <li><strong style="color: var(--red);">持续 vigorous 涂擦 2-3 分钟</strong></li>
+          <li>可辅以酒精擦拭（稀释非中和）</li>
+        </ol>
+      </div>
+    </div>
+    <div class="banner banner-navy" style="margin-top: 12px; font-size: 0.78rem;">
+      可用于糖尿病 · 儿童安全 · 术后感染极罕见 · 无需围术期抗生素 · 高年资住院医师即可操作
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>15</span></div>
+</div>
+
+<!-- ==================== SLIDE 16: PHENOL APPLICATION TIME ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">苯酚应用时间与复发率数据</div>
+  <div class="slide-content">
+    <div class="two-col">
+      <div class="card" style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--navy); text-align: center; margin-bottom: 16px;">苯酚应用时间 vs 复发率</div>
+        <div class="chart-bar">
+          <div class="bar-item">
+            <div class="bar" style="height: 129px; background: var(--amber);">
+              <span class="bar-value">12.9%</span>
+            </div>
+            <div class="bar-label">1分钟</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar" style="height: 39px; background: var(--clinical);">
+              <span class="bar-value">3.9%</span>
+            </div>
+            <div class="bar-label">2分钟</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar" style="height: 21px; background: var(--green);">
+              <span class="bar-value">2.1%</span>
+            </div>
+            <div class="bar-label">3分钟</div>
+          </div>
+        </div>
+        <div style="font-size: 0.7rem; color: var(--gray); text-align: center;">复发率 (%)</div>
+      </div>
+      <div class="card left-accent" style="border-left-color: var(--green);">
+        <div style="font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 10px;">关键发现</div>
+        <ul class="bullet">
+          <li>1分钟、2分钟、3分钟均有效</li>
+          <li>时间越长，复发率越低</li>
+          <li>但渗出时间也随之延长</li>
+        </ul>
+        <div style="background: #E8F5E9; border-radius: 4px; padding: 10px 14px; margin: 10px 0;">
+          <div style="font-size: 0.88rem; font-weight: 700; color: var(--green);">1分钟为最佳平衡点</div>
+          <div style="font-size: 0.72rem; color: var(--gray); font-style: italic;">（成功率与愈合时间的平衡）</div>
+        </div>
+        <div style="font-size: 0.85rem; font-weight: 700; color: var(--navy); margin-top: 8px; margin-bottom: 4px;">辅助措施：</div>
+        <ul class="bullet" style="--clinical: var(--navy);">
+          <li>含肾上腺素利多卡因：愈合11.1天 vs 19.0天</li>
+          <li>20%氯化铁可缩短愈合期</li>
+        </ul>
+        <div style="font-size: 0.75rem; color: var(--gray); margin-top: 8px;">疼痛在三组间无差异</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>16</span></div>
+</div>
+
+<!-- ==================== SLIDE 17: OTHER CHEMICAL & LASER ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">其他化学烧灼与激光</div>
+  <div class="slide-content">
+    <div class="grid-3" style="flex: 1;">
+      <div class="card" style="overflow: hidden; display: flex; flex-direction: column;">
+        <div class="card-header" style="background: var(--clinical); flex-direction: column; align-items: center;">
+          <span>氢氧化钠 (NaOH)</span>
+          <span style="font-size: 0.72rem; font-weight: 400;">10% 或 20%</span>
+        </div>
+        <ul class="bullet" style="flex: 1;">
+          <li>使用超过20年</li>
+          <li>效果与苯酚相当</li>
+          <li>1分钟为最佳应用时间</li>
+          <li>可用于糖尿病患者</li>
+          <li>渗出/愈合时间争议未定</li>
+        </ul>
+        <div class="banner banner-gray" style="font-size: 0.78rem;">效果 ≈ 苯酚</div>
+      </div>
+      <div class="card" style="overflow: hidden; display: flex; flex-direction: column;">
+        <div class="card-header" style="background: var(--green); flex-direction: column; align-items: center;">
+          <span>三氯醋酸 (TCA)</span>
+          <span style="font-size: 0.72rem; font-weight: 400;">100% 浓度</span>
+        </div>
+        <ul class="bullet" style="flex: 1;">
+          <li>烧灼外侧甲基质角</li>
+          <li>成功率 95%</li>
+          <li>2周内完全愈合</li>
+          <li>无延长渗出</li>
+          <li>近年新方法</li>
+        </ul>
+        <div class="banner banner-gray" style="font-size: 0.78rem; color: var(--green);">成功率 95%</div>
+      </div>
+      <div class="card" style="overflow: hidden; display: flex; flex-direction: column;">
+        <div class="card-header" style="background: var(--amber); flex-direction: column; align-items: center;">
+          <span>CO₂ 激光</span>
+          <span style="font-size: 0.72rem; font-weight: 400;">消融甲基质角</span>
+        </div>
+        <ul class="bullet" style="flex: 1;">
+          <li>疼痛减轻、出血少</li>
+          <li>手术时间短</li>
+          <li>但复发率争议大</li>
+          <li>单纯切除复发率37.5-50%</li>
+          <li>加甲襞汽化降至6.2%</li>
+        </ul>
+        <div class="banner banner-gray" style="font-size: 0.78rem; color: var(--amber);">复发率争议</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>17</span></div>
+</div>
+
+<!-- ==================== SLIDE 18: RECURRENCE COMPARISON ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">各方法复发率汇总对比</div>
+  <div class="slide-content">
+    <table class="data">
+      <thead>
+        <tr><th>方法</th><th style="text-align: center;">复发率</th><th>备注</th><th style="text-align: center;">推荐度</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight: 700; color: var(--green);">苯酚甲基质烧灼</td>
+          <td style="text-align: center; font-weight: 700; color: var(--green);">&lt; 1-2%</td>
+          <td>最常用、最安全</td>
+          <td style="text-align: center;"><span class="tag tag-green">★★★ 首选</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 700; color: var(--green);">三氯醋酸烧灼 (TCA)</td>
+          <td style="text-align: center; font-weight: 700; color: var(--green);">~5%</td>
+          <td>2周愈合，无延长渗出</td>
+          <td style="text-align: center;"><span class="tag tag-green">★★★ 推荐</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 700; color: var(--green);">选择性手术基质角切除</td>
+          <td style="text-align: center; color: var(--green);">低</td>
+          <td>愈合 &lt; 10天，手术首选</td>
+          <td style="text-align: center;"><span class="tag tag-green">★★★ 推荐</span></td>
+        </tr>
+        <tr>
+          <td>Vandenbos法</td>
+          <td style="text-align: center; color: var(--body);">低</td>
+          <td>愈合数周，不触及甲板</td>
+          <td style="text-align: center;"><span class="tag tag-amber">★★ 可选</span></td>
+        </tr>
+        <tr>
+          <td>CO₂激光（加甲襞汽化）</td>
+          <td style="text-align: center; color: var(--amber);">6.2%</td>
+          <td>单纯激光复发率更高</td>
+          <td style="text-align: center;"><span class="tag tag-amber">★★ 可选</span></td>
+        </tr>
+        <tr>
+          <td style="color: var(--red);">Zadik手术</td>
+          <td style="text-align: center; font-weight: 700; color: var(--red);">60.5%</td>
+          <td style="color: var(--red);">过时，不推荐</td>
+          <td style="text-align: center;"><span class="tag tag-red">✗ 不推荐</span></td>
+        </tr>
+        <tr>
+          <td style="color: var(--red);">楔形切除术</td>
+          <td style="text-align: center; font-weight: 700; color: var(--red);">高</td>
+          <td style="color: var(--red);">过时，不推荐</td>
+          <td style="text-align: center;"><span class="tag tag-red">✗ 不推荐</span></td>
+        </tr>
+        <tr>
+          <td style="color: var(--red);">拔甲术</td>
+          <td style="text-align: center; font-weight: 700; color: var(--red);">~100%</td>
+          <td style="color: var(--red);">无用且有害</td>
+          <td style="text-align: center;"><span class="tag tag-red">✗ 不推荐</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>18</span></div>
+</div>
+
+<!-- ==================== SLIDE 19: CONTROVERSIES SUMMARY ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">九大争议焦点总结</div>
+  <div class="slide-content">
+    <table class="data">
+      <thead>
+        <tr><th style="width: 35%;">争议点</th><th>作者立场</th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="font-weight: 700; color: var(--navy);">保守 vs 手术</td><td>根据病情严重程度和患者依从性决定</td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">软组织 vs 甲板/基质为病因</td><td>甲板宽度与甲床不匹配是核心，<strong>基质角是治疗靶点</strong></td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">楔形切除是否仍有地位</td><td style="color: var(--red);">已过时，不应再使用</td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">拔甲术是否有价值</td><td style="color: var(--red);">无用且有害</td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">苯酚 vs 手术切除</td><td style="color: var(--green);">苯酚更简单、更安全、复发率更低</td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">苯酚最佳应用时间</td><td>1-3分钟均有效，<strong>1分钟平衡最佳</strong></td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">抗生素是否需要</td><td style="color: var(--red);">几乎不需要（除冷刀手术穿过污染区域外）</td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">激光是否优于传统方法</td><td>优势有限，部分研究复发率高</td></tr>
+        <tr><td style="font-weight: 700; color: var(--navy);">命名：unguis incarnatus vs onychocryptosis</td><td>两种观点并存</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>19</span></div>
+</div>
+
+<!-- ==================== SLIDE 20: CLINICAL THINKING ==================== -->
+<div class="slide">
+  <div class="top-bar"></div>
+  <div class="slide-title">临床思考</div>
+  <div class="slide-content">
+    <div class="grid-2" style="gap: 16px;">
+      <div class="card left-accent" style="border-left-color: var(--green);">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <div class="num-circle" style="background: var(--green);">1</div>
+          <strong style="color: var(--navy);">苯酚法的核心地位</strong>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--body); line-height: 1.5;">简单、安全、低复发，门诊可常规开展。基层医疗机构尤其有推广价值——无需复杂设备，学习曲线短。</div>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--red);">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <div class="num-circle" style="background: var(--red);">2</div>
+          <strong style="color: var(--navy);">楔形切除的弃用</strong>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--body); line-height: 1.5;">国内仍有不少机构沿用传统楔形切除，需推动理念更新，将治疗靶点从"切除软组织"转向"处理甲基质角"。</div>
+      </div>
+      <div class="card left-accent">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <div class="num-circle" style="background: var(--clinical);">3</div>
+          <strong style="color: var(--navy);">保守治疗的价值</strong>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--body); line-height: 1.5;">早期轻度病例值得尝试胶带牵引、棉塞填塞、甲矫正器等。Omega钢丝等物理矫正装置在轻中度病例中有良好前景。</div>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--amber);">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <div class="num-circle" style="background: var(--amber);">4</div>
+          <strong style="color: var(--navy);">抗生素使用需规范</strong>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--body); line-height: 1.5;">国内嵌甲治疗中抗生素滥用普遍。炎症和肉芽组织的根源是嵌入的甲板，而非细菌感染本身。</div>
+      </div>
+      <div class="card left-accent">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <div class="num-circle" style="background: var(--clinical);">5</div>
+          <strong style="color: var(--navy);">外侧甲襞处理</strong>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--body); line-height: 1.5;">Vandenbos法和Noël法等单纯软组织切除技术不触及甲板和基质，在甲襞肥厚明显的病例中有独特价值。</div>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--navy);">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <div class="num-circle" style="background: var(--navy);">6</div>
+          <strong style="color: var(--navy);">综合治疗策略</strong>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--body); line-height: 1.5;">轻度保守、中度保守+微创、重度选择性基质角切除（苯酚或手术），甲襞肥厚明显者可联合软组织成形。</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>嵌甲治疗的争议 | Haneke (2012)</span><span>20</span></div>
+</div>
+
+<!-- ==================== SLIDE 21: CONCLUSION ==================== -->
+<div class="slide title-slide">
+  <div class="top-bar"></div>
+  <div class="slide-content" style="justify-content: center;">
+    <h1 style="font-size: 2.2rem; margin-bottom: 24px;">核心结论</h1>
+    <div style="display: flex; flex-direction: column; gap: 16px; max-width: 800px;">
+      <div style="display: flex; align-items: flex-start; gap: 12px;">
+        <span style="color: var(--green); font-size: 1.2rem;">✓</span>
+        <span style="color: var(--white); font-size: 0.95rem; line-height: 1.5;"><strong style="color: #81C784;">苯酚甲基质角烧灼</strong>是当前最安全、最简单、复发率最低（&lt;1-2%）的首选方法</span>
+      </div>
+      <div style="display: flex; align-items: flex-start; gap: 12px;">
+        <span style="color: var(--red); font-size: 1.2rem;">✗</span>
+        <span style="color: var(--white); font-size: 0.95rem; line-height: 1.5;"><strong style="color: #EF9A9A;">楔形切除术</strong>和<strong style="color: #EF9A9A;">拔甲术</strong>已过时，不应再推荐</span>
+      </div>
+      <div style="display: flex; align-items: flex-start; gap: 12px;">
+        <span style="color: var(--red); font-size: 1.2rem;">✗</span>
+        <span style="color: var(--white); font-size: 0.95rem; line-height: 1.5;"><strong style="color: #EF9A9A;">抗生素</strong>几乎总是资源浪费</span>
+      </div>
+      <div style="display: flex; align-items: flex-start; gap: 12px;">
+        <span style="color: var(--green); font-size: 1.2rem;">✓</span>
+        <span style="color: var(--white); font-size: 0.95rem; line-height: 1.5;"><strong style="color: #81C784;">选择性基质角切除</strong>是手术首选，关键在于足够根治性</span>
+      </div>
+      <div style="display: flex; align-items: flex-start; gap: 12px;">
+        <span style="color: var(--green); font-size: 1.2rem;">✓</span>
+        <span style="color: var(--white); font-size: 0.95rem; line-height: 1.5;">治疗应基于<strong style="color: #81C784;">病因病理学</strong>，而非习惯——治疗靶点是<strong style="color: #81C784;">外侧甲基质角</strong></span>
+      </div>
+    </div>
+    <div style="margin-top: 40px; color: var(--muted); font-size: 0.8rem;">
+      Haneke E. Dermatology Research and Practice, 2012. DOI: 10.1155/2012/783924
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 22: THANK YOU ==================== -->
+<div class="slide title-slide">
+  <div class="top-bar"></div>
+  <div class="slide-content" style="justify-content: center; align-items: center; text-align: center;">
+    <h1 style="font-size: 3rem; margin-bottom: 16px;">谢 谢</h1>
+    <div class="accent-line" style="margin: 0 auto 24px;"></div>
+    <p style="color: var(--muted); font-size: 1rem;">讨论与交流</p>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- ===== Navigation Controls ===== -->
+<div id="nav">
+  <button onclick="prevSlide()" title="上一页">◀</button>
+  <span id="counter">1 / 22</span>
+  <button onclick="nextSlide()" title="下一页">▶</button>
+</div>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+const counter = document.getElementById('counter');
+const progress = document.getElementById('progress');
+
+function showSlide(n) {
+  if (n < 0) n = 0;
+  if (n >= totalSlides) n = totalSlides - 1;
+  slides[currentSlide].classList.remove('active');
+  currentSlide = n;
+  slides[currentSlide].classList.add('active');
+  counter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+  progress.style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
+}
+
+function nextSlide() { showSlide(currentSlide + 1); }
+function prevSlide() { showSlide(currentSlide - 1); }
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+    e.preventDefault();
+    nextSlide();
+  } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+    e.preventDefault();
+    prevSlide();
+  } else if (e.key === 'Home') {
+    e.preventDefault();
+    showSlide(0);
+  } else if (e.key === 'End') {
+    e.preventDefault();
+    showSlide(totalSlides - 1);
+  } else if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }
+});
+
+// Click to advance (right half = next, left half = prev)
+document.getElementById('deck').addEventListener('click', (e) => {
+  // Don't interfere with nav buttons
+  if (e.target.closest('#nav')) return;
+  const rect = e.currentTarget.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  if (x > rect.width / 2) {
+    nextSlide();
+  } else {
+    prevSlide();
+  }
+});
+
+// Touch swipe
+let touchStartX = 0;
+document.addEventListener('touchstart', (e) => {
+  touchStartX = e.touches[0].clientX;
+});
+document.addEventListener('touchend', (e) => {
+  const touchEndX = e.changedTouches[0].clientX;
+  const diff = touchStartX - touchEndX;
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) nextSlide(); else prevSlide();
+  }
+});
+
+// Initialize
+showSlide(0);
+</script>
+</body>
+</html>
