@@ -1,3 +1,59 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+// ============================================================
+//  自定义样式：中文医学网站阅读优化
+//  说明：本文件在 Quartz 所有默认样式之后加载，优先级最高，
+//        升级 Quartz 时不会被覆盖，放心改这里即可。
+// ============================================================
+
+// ---------- 1. 字体栈（双语混排更美观）----------
+// quartz.config.yaml 的 typography 只能填一个字体名，这里补一个
+// “中文优先 + 英文回退”的字体栈。Noto 字体已由配置从 Google Fonts 加载。
+:root {
+  --bodyFont: "Noto Sans SC", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --headerFont: "Noto Serif SC", "Schibsted Grotesk", Georgia, "Songti SC", serif;
+}
+
+// ---------- 2. 正文字号与行距 ----------
+body {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+// ---------- 3. 标题层级 ----------
+h1 { font-size: 36px; line-height: 1.3; }
+h2 { font-size: 28px; line-height: 1.35; }
+h3 { font-size: 22px; line-height: 1.4; }
+h4 { font-size: 19px; line-height: 1.45; }
+
+// ---------- 4. 列表 ----------
+li {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+// ---------- 5. 文章正文段落更透气 ----------
+.center article p,
+.center article li {
+  line-height: 1.85;
+}
+
+// ---------- 6. 页面宽度：加宽正文区域 ----------
+// 默认 .page max-width = 1500px（左右侧栏各 320px，正文约 850px）。
+// 想让正文更宽，把下面的值调大（1700~2000 都可）：
+.page {
+  max-width: 1800px; // 此时正文约 1150px，适合病例图片 / 文献解读
+}
+
+// ---------- 7. 左侧/右侧目录栏字号 ----------
+// 嫌目录占地方就调小（如 14px），想更清晰就调大（如 17px）
+.sidebar {
+  font-size: 15px;
+}
+
+// ---------- 8. 首页品牌标题（左上角 Dr.Hayson 等）----------
+.page-title {
+  font-size: 30px;
+  line-height: 1.3;
+}
