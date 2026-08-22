@@ -336,4 +336,3 @@ tags: [甲沟炎, 嵌甲, 文献笔记, 综述, 治疗]
 - Vaccari E et al. "Partial excision of matrix and phenolic ablation..." Dermatol Surg, 2010;36(8):1288-1293. [84]
 - Kim SH et al. "Trichloroacetic acid matricectomy..." Dermatol Surg, 2009;35(6):973-979. [94]
 
-> **原文链接**: [https://doi.org/10.1155/2012/783924](https://doi.org/10.1155/2012/783924)

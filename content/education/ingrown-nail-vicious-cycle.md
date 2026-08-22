@@ -1,9 +1,5 @@
 ---
 title: "甲沟炎，恶性循环（Vicious Cycle）"
-tags:
-  - 甲沟炎
-  - 嵌甲
-  - 足部护理
 ---
 
 *By：Hayson海生 足下有道  
