@@ -1,6 +1,10 @@
+---
+title: 关于我
+---
+
 <div>
 
-<img class="profile-avatar" src="/image/hayson.png" width="299">
+<img class="profile-avatar" src="/assets/images/hayson.png" width="299">
 
 <p class="doctor-title">
 医科大学第一附属医院，手足踝外科，主治医师

@@ -1,7 +1,10 @@
 import { FolderPage } from "@quartz-community/folder-page"
 
 const displayTitles = {
-  "medical_education/index": "健康科普",
+  "education/index": "健康教育",
+  "research/index": "医学研究",
+  "clinical/index": "临床实践",
+  "nail-disease/index": "甲病专题",
 }
 
 export default function FolderPageTitles(options) {

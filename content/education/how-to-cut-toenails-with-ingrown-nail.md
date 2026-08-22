@@ -1,3 +1,11 @@
+---
+title: "甲沟炎，怎么剪趾甲？"
+tags:
+  - 甲沟炎
+  - 嵌甲
+  - 足部护理
+---
+
 *By：Hayson海生 足下有道 
 
 ![图片|515](../assets/wechat/5f08bd5d987d640b84ef.webp) ![图片|516](../assets/wechat/bdc45c79c5f44f944b95.webp)
