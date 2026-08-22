@@ -126,7 +126,7 @@ plugins:
     enabled: true
   - source: "@quartz-community/content-page"
     enabled: true
-  - source: "@quartz-community/folder-page"
+  - source: "@hayson/folder-page-titles"
     enabled: true
   - source: "@quartz-community/tag-page"
     enabled: true
