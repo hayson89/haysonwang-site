@@ -1,7 +1,10 @@
 ---
 title: 医生：我的趾甲怎么变成一层一层的？
 author: Hayson海生
+publish_date: 2026-08-22
 ---
+*By: Hayson海生
+
 你是不是发现：
 
 - 趾甲变厚、变黄

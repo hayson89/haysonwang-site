@@ -1,3 +1,0 @@
-cd E:\Website\quartz
-
-.\sync-content.ps1

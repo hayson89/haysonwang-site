@@ -7,7 +7,7 @@ title: 关于我
 <img class="profile-avatar" src="/assets/images/hayson.png" width="299">
 
 <p class="doctor-title">
-医科大学第一附属医院，手足踝外科，主治医师
+王海生，手足踝外科主治医师，医科大学第一附属医院
 </p>
 
 </div>

@@ -1,5 +1,6 @@
 ---
-title: "甲沟炎去医院：看哪个科室？"
+title: 甲沟炎去医院：看哪个科室？
+publish_date: 2026-08-16
 ---
 
 *By：王海生 Hayson Wang*

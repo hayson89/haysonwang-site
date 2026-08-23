@@ -1,22 +1,6 @@
 ---
-title: "Controversies in the Treatment of Ingrown Nails"
-authors: Eckart Haneke
-journal: Dermatology Research and Practice
-year: 2012
-doi: 10.1155/2012/783924
-keywords: [ingrown nail, onychocryptosis, unguis incarnatus, phenolisation, matrix horn, wedge excision, matricectomy, nail brace]
-tags: [甲沟炎, 嵌甲, 文献笔记, 综述, 治疗]
+title: Controversies in the Treatment of Ingrown Nails
 ---
-
-# Controversies in the Treatment of Ingrown Nails
-
-> **期刊**: Dermatology Research and Practice, Volume 2012, Article ID 783924, 12 pages
-> **作者**: Eckart Haneke（伯尔尼大学医院皮肤科；Dermaticum皮肤科诊所；Epideris皮肤中心；根特大学附属医院皮肤科）
-> **文章类型**: 综述（Review Article）
-> **DOI**: [10.1155/2012/783924](https://doi.org/10.1155/2012/783924)
-
----
-
 ## 一、研究背景（Background）
 
 ### 疾病背景

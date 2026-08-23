@@ -1,6 +1,6 @@
 ---
-title: "甲沟炎，怎么剪趾甲？"
-
+title: 甲沟炎，怎么剪趾甲？
+publish_date: 2026-08-14
 ---
 
 *By：Hayson海生 足下有道 
