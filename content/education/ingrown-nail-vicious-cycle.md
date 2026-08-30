@@ -1,6 +1,6 @@
 ---
 title: 甲沟炎，恶性循环（Vicious Cycle）
-publish_date: 2026-08-18
+date: 2026-08-18
 ---
 
 *By：Hayson海生 足下有道  

@@ -1,7 +1,7 @@
 ---
 title: 医生：我的趾甲怎么变成一层一层的？
 author: Hayson海生
-publish_date: 2026-08-22
+date: 2026-08-22
 ---
 *By: Hayson海生
 
@@ -20,8 +20,9 @@ publish_date: 2026-08-22
 ![[retronychia_redness.jpg|319]]
 > 单侧趾甲出现分层、变黄、生长迟滞，伴有近端甲皱襞红肿、疼痛，严重时可出现破溃、流脓。
 ## 或者是这样
-![[retronychia_double_foot.png|453]]
-> 双侧足拇趾甲板变黄、分层，近端甲皱襞炎症逐渐消退后，可出现色素沉着、压痛，趾甲长期无修剪。
+
+![[typical_retronychia_layer_by_layer3.png|549]]
+> 双侧足拇趾甲板变黄、分层堆叠，趾甲长期无修剪。
 ## 严重时可能出现这样的表现
 ![[retronychia_with_proximal_paraonychia.png]]
 > 趾甲明显变黄、增厚，近端甲皱襞红肿、疼痛，并可能伴有肉芽组织形成。
