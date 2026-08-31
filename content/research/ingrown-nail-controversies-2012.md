@@ -1,5 +1,6 @@
 ---
 title: Controversies in the Treatment of Ingrown Nails
+date: 2026-08-16
 ---
 ## 一、研究背景（Background）
 
