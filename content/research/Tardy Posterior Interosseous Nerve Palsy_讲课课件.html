@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>迟发性骨间后神经麻痹 · 讲课课件</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A2540;
+    --blue: #1B3A5C;
+    --clinical: #2E86AB;
+    --red: #C62828;
+    --green: #2E7D32;
+    --amber: #E65100;
+    --light: #F1F5F9;
+    --lightGray: #ECEFF1;
+    --gray: #546E7A;
+    --muted: #78909C;
+    --body: #37474F;
+    --white: #FFFFFF;
+  }
+
+  html, body {
+    background: var(--navy);
+    overflow: hidden;
+    height: 100%;
+    font-family: "Noto Sans SC", "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    color: var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== 进度条 ===== */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 6px;
+    width: 0%;
+    background: var(--clinical);
+    z-index: 1000;
+    transition: width .35s ease;
+  }
+
+  /* ===== 幻灯片容器 ===== */
+  #deck {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    background: var(--light);
+    overflow: hidden;
+  }
+  .slide.active { display: flex; }
+
+  .top-bar { height: 6px; background: var(--clinical); flex: 0 0 auto; }
+
+  .slide-title {
+    padding: 26px 48px 10px;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .slide-title .tag {
+    font-size: .8rem;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--clinical);
+    padding: 4px 12px;
+    border-radius: 999px;
+    letter-spacing: .5px;
+  }
+  .slide-title .divider {
+    flex: 1;
+    height: 2px;
+    background: var(--lightGray);
+  }
+
+  .slide-content {
+    flex: 1;
+    padding: 8px 48px 64px;
+    overflow-y: auto;
+  }
+
+  /* ===== 页脚 ===== */
+  .footer {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 48px;
+    font-size: .78rem;
+    color: var(--muted);
+    background: var(--white);
+    border-top: 1px solid var(--lightGray);
+  }
+  .footer .brand { font-weight: 700; color: var(--blue); letter-spacing: .5px; }
+
+  /* ===== 导航控件 ===== */
+  .nav-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 1001;
+    display: flex; align-items: center; justify-content: center;
+    opacity: .55;
+    transition: opacity .2s;
+  }
+  .nav-btn:hover { opacity: 1; }
+  #prevBtn { left: 20px; }
+  #nextBtn { right: 20px; }
+
+  #fullscreenBtn {
+    position: fixed;
+    top: 16px; right: 20px;
+    background: transparent;
+    border: 1px solid var(--lightGray);
+    color: var(--gray);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: .8rem;
+    cursor: pointer;
+    z-index: 1001;
+    background: var(--white);
+  }
+  #fullscreenBtn:hover { color: var(--navy); border-color: var(--clinical); }
+
+  #counter {
+    position: fixed;
+    bottom: 16px; right: 24px;
+    background: var(--navy);
+    color: var(--white);
+    font-size: .78rem;
+    padding: 5px 12px;
+    border-radius: 999px;
+    z-index: 1001;
+    opacity: .85;
+  }
+
+  /* ===== 通用组件 ===== */
+  .grid { display: grid; gap: 20px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--lightGray);
+    border-radius: 12px;
+    padding: 20px 22px;
+    box-shadow: 0 2px 8px rgba(10,37,64,.05);
+  }
+  .card h3 {
+    font-size: 1.05rem;
+    color: var(--blue);
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .card p, .card li { font-size: .95rem; line-height: 1.7; }
+
+  .card.accent { border-left: 5px solid var(--clinical); }
+  .card.warn { border-left: 5px solid var(--amber); }
+  .card.alert { border-left: 5px solid var(--red); }
+  .card.ok { border-left: 5px solid var(--green); }
+
+  .badge {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-right: 6px;
+  }
+  .badge.blue { background: #E3F0F7; color: var(--clinical); }
+  .badge.red { background: #FBE9E7; color: var(--red); }
+  .badge.green { background: #E8F0E8; color: var(--green); }
+  .badge.amber { background: #FDEBDD; color: var(--amber); }
+
+  .callout {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-size: .98rem;
+    line-height: 1.7;
+  }
+  .callout.info { background: #E3F0F7; border-left: 5px solid var(--clinical); color: var(--blue); }
+  .callout.warn { background: #FDEBDD; border-left: 5px solid var(--amber); color: #7A3C10; }
+  .callout.alert { background: #FBE9E7; border-left: 5px solid var(--red); color: #7A1F1F; }
+  .callout.key { background: #EAF6EA; border-left: 5px solid var(--green); color: var(--green); }
+
+  ul.clean { list-style: none; padding: 0; }
+  ul.clean li { padding-left: 24px; position: relative; margin: 8px 0; line-height: 1.6; }
+  ul.clean li::before {
+    content: "▸";
+    position: absolute; left: 4px;
+    color: var(--clinical);
+    font-weight: 700;
+  }
+
+  .key-point {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 12px;
+    padding: 26px 30px;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    font-weight: 500;
+  }
+  .key-point .label {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #7EC4E0;
+    margin-bottom: 10px;
+  }
+
+  /* ===== 表格 ===== */
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .85rem;
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  table.data th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 700;
+    font-size: .82rem;
+  }
+  table.data td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--lightGray);
+    vertical-align: top;
+  }
+  table.data tr:nth-child(even) td { background: #F7FAFC; }
+  table.data tr.highlight td {
+    background: #E3F0F7 !important;
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  /* ===== 时间线 ===== */
+  .timeline { position: relative; padding-left: 26px; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 8px; top: 6px; bottom: 6px;
+    width: 3px;
+    background: var(--clinical);
+    border-radius: 3px;
+  }
+  .timeline .node { position: relative; margin: 14px 0; }
+  .timeline .node::before {
+    content: "";
+    position: absolute;
+    left: -26px; top: 6px;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: var(--clinical);
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 2px var(--clinical);
+  }
+  .timeline .node.highlight::before { background: var(--red); box-shadow: 0 0 0 2px var(--red); }
+  .timeline .time { font-weight: 800; color: var(--blue); font-size: .9rem; }
+  .timeline .desc { font-size: .92rem; color: var(--body); line-height: 1.5; }
+
+  /* ===== 图片 ===== */
+  .figure {
+    background: var(--white);
+    border: 1px solid var(--lightGray);
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+  }
+  .figure img {
+    max-width: 100%;
+    max-height: 46vh;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+  .figure .caption {
+    margin-top: 10px;
+    font-size: .82rem;
+    color: var(--gray);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* ===== 标题页 ===== */
+  .slide.title-slide {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    color: var(--white);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px;
+  }
+  .title-slide .kicker {
+    font-size: .85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #7EC4E0;
+    margin-bottom: 22px;
+    font-weight: 600;
+  }
+  .title-slide h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    line-height: 1.35;
+    margin-bottom: 18px;
+    max-width: 900px;
+  }
+  .title-slide .subtitle {
+    font-size: 1.15rem;
+    color: #C7DCE8;
+    margin-bottom: 44px;
+    font-weight: 400;
+  }
+  .title-slide .rule { width: 80px; height: 4px; background: var(--clinical); margin: 0 auto 36px; border-radius: 2px; }
+  .title-slide .meta { font-size: .98rem; color: #D9E6EF; line-height: 1.9; }
+  .title-slide .meta strong { color: var(--white); }
+
+  .agenda-list { list-style: none; padding: 0; }
+  .agenda-list li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 15px 20px;
+    background: var(--white);
+    border: 1px solid var(--lightGray);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+  .agenda-list .num {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    flex: 0 0 auto;
+  }
+  .agenda-list .en { color: var(--muted); font-size: .82rem; margin-left: auto; }
+
+  @media (max-width: 900px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .slide-title { font-size: 1.4rem; padding: 18px 24px 8px; }
+    .slide-content { padding: 8px 24px 60px; }
+    .title-slide h1 { font-size: 1.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="deck">
+
+  <!-- ===================== 1. 标题页 ===================== -->
+  <section class="slide title-slide active">
+    <div class="kicker">Case Report &amp; Literature Review</div>
+    <h1>迟发性骨间后神经麻痹<br>——未复位孟氏骨折的罕见并发症</h1>
+    <div class="rule"></div>
+    <div class="subtitle">Tardy Posterior Interosseous Nerve Palsy as a Complication<br>of Unreduced Monteggia Fracture</div>
+    <div class="meta">
+      <strong>主讲人：Hayson Wong</strong><br>
+      WNMC Hand and Foot &amp; Ankle Department
+    </div>
+  </section>
+
+  <!-- ===================== 2. 目录 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">目录</span> 课程内容 <span class="divider"></span></div>
+    <div class="slide-content">
+      <ul class="agenda-list">
+        <li><span class="num">1</span> 引言：临床意义与背景 <span class="en">Introduction</span></li>
+        <li><span class="num">2</span> 骨间后神经（PIN）与孟氏骨折解剖 <span class="en">Anatomy &amp; Biomechanics</span></li>
+        <li><span class="num">3</span> Bado 分型 <span class="en">Classification</span></li>
+        <li><span class="num">4</span> 病例汇报与诊断 <span class="en">Case Report &amp; Diagnosis</span></li>
+        <li><span class="num">5</span> 手术策略与康复时间线 <span class="en">Treatment &amp; Recovery</span></li>
+        <li><span class="num">6</span> 文献综述对照 <span class="en">Literature Review</span></li>
+        <li><span class="num">7</span> 结论与临床要点 <span class="en">Conclusion &amp; Clinical Message</span></li>
+      </ul>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 3. 学习要点 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">要点</span> 学习要点 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="key-point">
+        <div class="label">Learning Point of the Article</div>
+        迟发性骨间后神经（PIN）麻痹可发生于陈旧的、未复位的孟氏骨折患者中。<br>
+        这提示临床医生必须<strong>详细采集病史</strong>，治疗的核心在于<strong>解除神经受压</strong>，
+        同时<strong>保护患者已经适应的功能</strong>。
+      </div>
+      <div class="grid grid-3" style="margin-top:22px;">
+        <div class="card accent"><h3>罕见</h3><p>急性 PIN 麻痹是孟氏骨折公认并发症，但<strong>迟发性</strong> PIN 麻痹极其罕见，英文文献仅 6 例。</p></div>
+        <div class="card warn"><h3>隐匿</h3><p>症状可在受伤后数十年才出现，易被漏诊，需高度警惕与详尽病史。</p></div>
+        <div class="card ok"><h3>可治</h3><p>针对病因（桡骨头持续脱位压迫）手术，神经功能可完全恢复。</p></div>
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 4. 引言 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">1</span> 引言：背景与临床意义 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="grid grid-2">
+        <div class="card accent">
+          <h3>已知背景</h3>
+          <ul class="clean">
+            <li>急性骨间后神经（PIN）麻痹是孟氏骨折的<strong>公认并发症</strong>。</li>
+            <li>但由<strong>桡骨头持续脱位</strong>导致的迟发性 / 迟延性 PIN 麻痹极为罕见。</li>
+            <li>首例报道：Lichter 与 Jacobsen（1975），此后英文文献仅零散数例。</li>
+          </ul>
+        </div>
+        <div class="card warn">
+          <h3>临床意义</h3>
+          <ul class="clean">
+            <li>陈旧损伤可<strong>长期无症状</strong>，多年后才显现神经症状。</li>
+            <li>易被误诊为其他原因（腱鞘炎、神经卡压、运动神经元病等）。</li>
+            <li>关键在于<strong>详细病史</strong> + 识别既往肘部外伤线索。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout info" style="margin-top:18px;">
+        <strong>本文价值：</strong>报告一例<strong>孟氏骨折后 29 年</strong>才出现的迟发性 PIN 麻痹，
+        并系统回顾英文文献全部 6 例，是<strong>首例初始骨折发生于成年期（28 岁）</strong>的报道。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 5. PIN 解剖 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">2</span> 骨间后神经（PIN）解剖 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="grid grid-2">
+        <div class="card accent">
+          <h3>走行与支配</h3>
+          <ul class="clean">
+            <li>PIN 为<strong>桡神经深支</strong>，在桡骨颈水平发出。</li>
+            <li>穿入<strong>旋后肌（supinator）</strong>，于旋后肌内下行至前臂后侧。</li>
+            <li>支配：旋后肌 + 全部前臂伸肌群（ECRB、EDC、EDM、ECU、APL、EPL、EPB、EI）。</li>
+            <li><strong>纯运动神经</strong>——无皮肤感觉支配（桡神经浅支独立）。</li>
+          </ul>
+        </div>
+        <div class="card warn">
+          <h3>Frohse 弓（Frohse's Arcade）</h3>
+          <ul class="clean">
+            <li>旋后肌<strong>近侧缘</strong>的纤维性腱弓，是 PIN 进入旋后肌的“门户”。</li>
+            <li>是 PIN 卡压最常见的解剖位点。</li>
+            <li>本文病例中<strong>完全松解 Frohse 弓</strong>是神经松解的关键步骤。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout alert" style="margin-top:16px;">
+        <strong>临床特征：</strong>PIN 麻痹表现为<strong>腕、指、拇不能背伸</strong>，
+        但因桡侧腕长伸肌（ECRL）由桡神经主干支配而保留 → 腕背伸时<strong>向桡侧偏斜</strong>；
+        且<strong>无感觉障碍</strong>（桡神经浅支不受累）。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 6. 病理机制 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">2</span> 孟氏骨折与迟发麻痹的病理机制 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="callout info">
+        <strong>孟氏骨折（Monteggia fracture）：</strong>尺骨干骨折合并桡骨头脱位。
+        未复位时桡骨头长期<strong>向前脱位</strong>，位于 PIN 走行区，形成持续性机械压迫。
+      </div>
+      <div class="grid grid-2" style="margin-top:16px;">
+        <div class="card">
+          <h3>直接压迫</h3>
+          <p>脱位的桡骨头直接顶压 PIN，造成神经在进入旋后肌之前的肿胀与卡压（MRI 可见）。</p>
+        </div>
+        <div class="card">
+          <h3>慢性进展</h3>
+          <ul class="clean">
+            <li>瘢痕组织逐渐形成、牵拉神经。</li>
+            <li>PIN 与周围结构的相对位置改变。</li>
+            <li>反复微创伤 / 过度使用（体力劳动）诱发症状。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout warn" style="margin-top:16px;">
+        <strong>“迟发”的解释：</strong>伤后多年无症状，当神经受压量累积到阈值、
+        或因剧烈体力活动加重水肿/瘢痕增生时，症状突然显现——如本例女裁缝<strong>近期增加工作量</strong>后发病。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 7. Bado 分型 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">3</span> Bado 分型 <span class="divider"></span></div>
+    <div class="slide-content">
+      <table class="data">
+        <thead>
+          <tr><th style="width:12%;">分型</th><th style="width:34%;">桡骨头脱位方向</th><th style="width:34%;">尺骨骨折特点</th><th style="width:20%;">发生率</th></tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td><strong>I 型</strong></td>
+            <td>桡骨头<strong>向前</strong>（前）脱位</td>
+            <td>尺骨干骨折，尺骨成角<strong>向前</strong>（apex 前）</td>
+            <td>最常见（~60%）</td>
+          </tr>
+          <tr>
+            <td><strong>II 型</strong></td>
+            <td>桡骨头<strong>向后 / 后外侧</strong>脱位</td>
+            <td>尺骨干骨折，apex 向后</td>
+            <td>~15%</td>
+          </tr>
+          <tr>
+            <td><strong>III 型</strong></td>
+            <td>桡骨头<strong>向外侧 / 前外侧</strong>脱位</td>
+            <td>尺骨<strong>干骺端</strong>骨折</td>
+            <td>~20%</td>
+          </tr>
+          <tr>
+            <td><strong>IV 型</strong></td>
+            <td>桡骨头<strong>向前</strong>脱位</td>
+            <td>尺骨 + 桡骨<strong>双骨干</strong>骨折</td>
+            <td>~5%</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout info" style="margin-top:16px;">
+        <strong>本例：</strong>X 线示桡骨头<strong>向前脱位</strong>，符合 <strong>Bado I 型</strong>孟氏骨折。
+        I 型桡骨头前脱位时，PIN 恰处于脱位桡骨头的前方走行区，最易受压。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 8. 病例-病史 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">4</span> 病例汇报 · 病史 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="grid grid-2">
+        <div class="card accent">
+          <h3>一般情况</h3>
+          <ul class="clean">
+            <li><strong>57 岁女性</strong>，纺织厂<strong>裁缝（seamstress）</strong>。</li>
+            <li>主诉：<strong>右手进行性无力 1 年</strong>。</li>
+            <li>发病前<strong>近期增加工作量</strong>。</li>
+            <li>最早症状：做家务时<strong>伸指困难</strong>。</li>
+          </ul>
+        </div>
+        <div class="card warn">
+          <h3>关键既往史</h3>
+          <ul class="clean">
+            <li>约 <strong>29 年前</strong>因<strong>车祸致右肘骨折</strong>。</li>
+            <li>当时行<strong>保守治疗</strong>（未复位 / 未手术）。</li>
+            <li>自述受伤前肘部活动正常，无其他上肢外伤史。</li>
+            <li>——这是识别“陈旧孟氏骨折”的<strong>核心线索</strong>。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout key" style="margin-top:16px;">
+        <strong>病史启示：</strong>面对中老年患者<strong>无诱因的伸肌群麻痹</strong>，
+        务必追问<strong>数十年内的肘部外伤史</strong>，陈旧孟氏骨折是可能被长期遗忘的病因。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 9. 病例-查体 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">4</span> 病例汇报 · 体格检查 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="grid grid-3">
+        <div class="card alert"><h3>运动</h3><p>腕、拇指、手指<strong>完全不能背伸</strong>（extension 完全丧失）。</p></div>
+        <div class="card warn"><h3>肘关节活动</h3><p>屈伸受限：<strong>伸 30°～屈 140°</strong>，自受伤以来<strong>无变化</strong>。</p></div>
+        <div class="card ok"><h3>感觉</h3><p>桡神经浅支分布区<strong>感觉正常</strong>——符合 PIN 纯运动麻痹。</p></div>
+      </div>
+      <div class="callout info" style="margin-top:20px;">
+        <strong>查体小结：</strong>选择性累及<strong>伸肌群、无感觉障碍</strong>的临床表现，
+        高度指向<strong>骨间后神经麻痹</strong>；肘关节伸屈受限（伸 30°）与既往未复位骨折所致关节改变一致。
+      </div>
+      <div class="card" style="margin-top:12px;">
+        <h3>定位诊断思路</h3>
+        <ul class="clean">
+          <li>腕/指/拇不能伸 + 感觉正常 → 排除高位桡神经损伤（高位会有感觉障碍）。</li>
+          <li>保留 ECRL（腕背伸向桡偏）→ 定位在 PIN 发出 ECRL 分支之后 → 旋后肌 / Frohse 弓区域。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 10. 诊断-辅助检查 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">4</span> 诊断 · 辅助检查 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="grid grid-3">
+        <div class="card accent">
+          <h3><span class="badge blue">EMG</span> 电生理</h3>
+          <p><strong>确认 PIN 麻痹</strong>，明确神经损伤定位与严重程度，排除其他病因。</p>
+        </div>
+        <div class="card accent">
+          <h3><span class="badge blue">X 线</span> 影像</h3>
+          <p>示<strong>桡骨头向前脱位</strong>，符合 <strong>Bado I 型</strong>孟氏骨折（图 1）。</p>
+        </div>
+        <div class="card accent">
+          <h3><span class="badge blue">MRI</span> 磁共振</h3>
+          <p>脱位的桡骨头<strong>压迫 PIN</strong>；从受压处到神经进入旋后肌之前可见<strong>肿胀区</strong>。</p>
+        </div>
+      </div>
+      <div class="callout key" style="margin-top:20px;">
+        <strong>诊断链：</strong>病史（29 年前肘骨折）→ 查体（选择性伸肌麻痹、感觉正常）→ EMG（PIN 麻痹）
+        → X 线（桡骨头前脱位，Bado I）→ MRI（桡骨头压迫 PIN）→ <strong>确诊：陈旧孟氏骨折继发迟发性 PIN 麻痹</strong>。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 11. 图1 X线 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">影像</span> 图 1 · 肘关节侧位 X 线 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="figure">
+        <img src="images/IMG_3.jpg" alt="Lateral radiograph showing anterior dislocation of the radial head">
+        <div class="caption"><strong>Figure 1.</strong> 侧位 X 线片示<strong>桡骨头向前脱位</strong>（anterior dislocation of the radial head），符合 Bado I 型孟氏骨折。</div>
+      </div>
+      <div class="callout warn" style="margin-top:14px;">
+        <strong>读片要点：</strong>侧位片上桡骨头脱离肱骨小头（capitellum）轴线、向前方移位，
+        是陈旧孟氏骨折最直观的影像证据——在伸肌麻痹患者中一旦发现，病因即可锁定。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 12. 图2 神经瘤 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">影像</span> 图 2 · PIN 神经瘤 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="figure">
+        <img src="images/IMG_10.jpg" alt="Neuroma of the posterior interosseous nerve (arrow)">
+        <div class="caption"><strong>Figure 2.</strong> 术中所见<strong>骨间后神经神经瘤</strong>（箭头指示），位于桡骨头前方。</div>
+      </div>
+      <div class="callout info" style="margin-top:14px;">
+        <strong>术中意义：</strong>桡骨头前方发现的 PIN 神经瘤，是长期机械压迫导致的<strong>局灶性神经病变</strong>的直接证据，
+        也进一步印证了“桡骨头持续脱位 → 神经受压”的发病机制。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 13. 手术策略 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">5</span> 手术策略 · Henry 入路 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="callout info"><strong>入路：</strong>右肘 <strong>Henry 入路</strong>（前外侧入路），依次显露并保护结构。</div>
+      <div class="grid grid-2" style="margin-top:14px;">
+        <div class="card">
+          <h3>关键步骤</h3>
+          <ul class="clean">
+            <li>游离并隔离<strong>前臂前侧皮神经</strong>（anterior cutaneous nerve of forearm）。</li>
+            <li>在<strong>肱桡肌（brachioradialis）与肱二头肌（biceps）</strong>间隙进入。</li>
+            <li>行<strong>彻底神经松解（neurolysis）</strong>，完全松解 <strong>Frohse 弓</strong>。</li>
+            <li>桡骨头前方发现 <strong>PIN 神经瘤</strong>。</li>
+          </ul>
+        </div>
+        <div class="card alert">
+          <h3>关键处理</h3>
+          <ul class="clean">
+            <li><strong>前关节囊切开术（anterior capsulotomy）</strong>。</li>
+            <li><strong>桡骨头切除（radial head excision）</strong>——因脱位的桡骨头是持续压迫与张力的根源。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout key" style="margin-top:16px;">
+        <strong>决策逻辑：</strong>桡骨头持续参与神经压迫与畸形 → 选择<strong>“桡骨头切除 + 神经松解”</strong>；
+        若压迫主要来自软组织（如 Frohse 韧带），则<strong>单纯神经松解</strong>即可。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 14. 康复时间线 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">5</span> 术后康复时间线 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="timeline">
+        <div class="node"><span class="time">术后 0～2 周</span><div class="desc"><strong>石膏制动</strong> 2 周；随后改用<strong>动态桡神经支具</strong>佩戴 4 个月。</div></div>
+        <div class="node"><span class="time">术后 1 个月</span><div class="desc">开始<strong>物理治疗</strong>；主动伸指出现<strong>残留性恢复</strong>。</div></div>
+        <div class="node"><span class="time">术后 4 个月</span><div class="desc">第 <strong>5 至第 3 指</strong>活动显著恢复。</div></div>
+        <div class="node"><span class="time">术后 7 个月</span><div class="desc"><strong>拇指与食指</strong>活动恢复。</div></div>
+        <div class="node highlight"><span class="time">术后 1 年</span><div class="desc">拇指、手指、腕部背伸<strong>完全恢复</strong>；肘关节活动改善，仅剩最后 <strong>10°</strong> 伸直受限。</div></div>
+      </div>
+      <div class="callout ok" style="margin-top:16px;">
+        <strong>预后：</strong>尽管麻痹迁延 1 年，神经松解 + 减压后功能<strong>近乎完全恢复</strong>，
+        提示 PIN 神经瘤以<strong>传导阻滞为主、轴索尚存</strong>，及时减压可获良好预后。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 15. 图3 术后功能 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">影像</span> 图 3 · 术后 1 年功能恢复 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="figure">
+        <img src="images/IMG_5.jpg" alt="Thumb, wrist and elbow extension 1 year postoperative">
+        <div class="caption"><strong>Figure 3.</strong> 术后 1 年，拇指、腕部及肘部的<strong>伸直功能</strong>（thumb, wrist and elbow extension）。</div>
+      </div>
+      <div class="callout ok" style="margin-top:14px;">
+        <strong>功能结局：</strong>术后 1 年伸腕、伸指、伸拇完全恢复，仅肘关节残留 10° 伸直受限——神经功能康复理想。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 16. 文献综述 Table 1 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">6</span> 文献综述 · 英文文献全部病例对照 <span class="divider"></span></div>
+    <div class="slide-content">
+      <table class="data" style="font-size:.76rem;">
+        <thead>
+          <tr>
+            <th>作者 / 年份</th><th>性别</th><th>麻痹发病年龄</th><th>骨折年龄</th><th>间隔(年)</th><th>症状时长(月)</th><th>治疗</th><th>术后恢复(月)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Litcher &amp; Jacobsen, 1975</td><td>男</td><td>46</td><td>7</td><td>39</td><td>12</td><td>桡骨头切除 + 神经松解</td><td>2.5</td></tr>
+          <tr><td>Austin, 1976</td><td>男</td><td>72</td><td>7</td><td>65</td><td>1</td><td>桡骨头切除 + 神经松解</td><td>9</td></tr>
+          <tr><td rowspan="2">Holst-Nielsen &amp; Jensen, 1984</td><td rowspan="2">女</td><td>46</td><td>7</td><td>39</td><td>9</td><td>仅神经松解</td><td>4</td></tr>
+          <tr><td>34</td><td>4</td><td>30</td><td>24</td><td>仅神经松解</td><td>11</td></tr>
+          <tr><td>Hashizume et al., 1995</td><td>女</td><td>44</td><td>5</td><td>39</td><td>2.5</td><td>桡骨头切除 + 神经松解</td><td>—</td></tr>
+          <tr class="highlight"><td><strong>本例（本文）</strong></td><td>女</td><td><strong>57</strong></td><td><strong>28</strong></td><td><strong>29</strong></td><td>12</td><td>桡骨头切除 + 神经松解</td><td>12（完全恢复）</td></tr>
+        </tbody>
+      </table>
+      <div class="callout info" style="margin-top:14px;">
+        <strong>文献特点：</strong>既往 6 例<strong>骨折均发生于儿童期</strong>（平均 6 岁，4～7 岁）；平均<strong>间隔 42 年</strong>发病；
+        平均<strong>术后恢复 6 个月</strong>。本例为<strong>首例初始骨折发生于成年期（28 岁）</strong>，
+        间隔 <strong>29 年</strong>明显短于既往——与初始骨折发生较晚有关。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 17. 讨论-发病机制 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">6</span> 讨论 · 发病机制假设 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="card accent">
+        <h3>为何症状在数十年后才出现？</h3>
+        <ul class="clean">
+          <li><strong>瘢痕组织</strong>逐渐形成，逐步增加对神经的压力。</li>
+          <li>PIN 与周围结构的<strong>相对位置改变</strong>，使神经慢性受压加重。</li>
+          <li><strong>反复微创伤 / 过度使用</strong>与症状诱发相关。</li>
+        </ul>
+      </div>
+      <div class="callout warn" style="margin-top:14px;">
+        <strong>“过度使用”线索的文献佐证：</strong>Litcher 与 Austin 的病例为<strong>体力劳动者</strong>；
+        Holst-Nielsen 首例为<strong>刚转做女佣的主妇</strong>、次例为<strong>改行带孩子的秘书</strong>；
+        Cho 等的病例为主妇在<strong>帮家人筹备婚礼的繁重劳动后</strong>发病。
+      </div>
+      <div class="callout key" style="margin-top:14px;">
+        <strong>机制推论：</strong>剧烈体力活动可<strong>加重瘢痕增生、加剧退变或诱发局部水肿</strong>，
+        从而增加 PIN 所受压力，成为症状发作的<strong>扳机</strong>——本例患者近期工作与家务负荷增加后发病，与此吻合。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 18. 讨论-手术策略比较 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">6</span> 讨论 · 手术策略选择 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="grid grid-2">
+        <div class="card ok">
+          <h3>桡骨头切除 + 神经松解</h3>
+          <p><strong>适用：</strong>桡骨头持续参与神经压迫与畸形（本例）。</p>
+          <p style="margin-top:6px;"><span class="badge blue">文献</span> Litcher、Austin、Hashizume 均采用。</p>
+        </div>
+        <div class="card">
+          <h3>单纯神经松解</h3>
+          <p><strong>适用：</strong>压迫主要来自软组织（如 Frohse 韧带为唯一来源）。</p>
+          <p style="margin-top:6px;"><span class="badge blue">文献</span> Holst-Nielsen 两例仅行神经松解。</p>
+        </div>
+      </div>
+      <div class="callout alert" style="margin-top:18px;">
+        <strong>核心原则：</strong>治疗必须<strong>针对根本病因</strong>（陈旧骨折脱位导致的持续压迫），
+        同时<strong>不牺牲患者已适应的功能</strong>。本例在减压的同时，尊重其多年形成的代偿性功能状态。
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 19. 结论 ===================== -->
+  <section class="slide">
+    <div class="top-bar"></div>
+    <div class="slide-title"><span class="tag">7</span> 结论与临床要点 <span class="divider"></span></div>
+    <div class="slide-content">
+      <div class="card accent">
+        <h3>结论（Conclusion）</h3>
+        <p>此类病变虽罕见，但对<strong>陈旧、未复位的孟氏骨折</strong>患者，必须保持<strong>高度警惕</strong>，
+        警惕发生迟发性 PIN 麻痹的可能。强调<strong>详尽准确的病史</strong>对识别潜在病因至关重要——多年无症状的损伤，可能随时间推移逐渐显现症状。</p>
+      </div>
+      <div class="callout key" style="margin-top:16px;">
+        <strong>Clinical Message（临床信息）：</strong>对持续性桡骨头脱位所致迟发性 PIN 麻痹的治疗，
+        应<strong>针对根本病因</strong>——即陈旧骨折脱位造成的压迫，同时确保<strong>不损害已经适应此状态的患者功能</strong>。
+      </div>
+      <div class="grid grid-3" style="margin-top:18px;">
+        <div class="card warn"><h3>问病史</h3><p>伸肌群麻痹患者务必追问远期肘部外伤史。</p></div>
+        <div class="card ok"><h3>找病因</h3><p>X 线 / MRI 识别陈旧桡骨头脱位对 PIN 的压迫。</p></div>
+        <div class="card accent"><h3>治根本</h3><p>减压（切除 + 松解）并保护已适应功能。</p></div>
+      </div>
+    </div>
+    <div class="footer"><span class="brand">WNMC · Hand and Foot &amp; Ankle</span><span>迟发性 PIN 麻痹讲课课件</span></div>
+  </section>
+
+  <!-- ===================== 20. 结束页 ===================== -->
+  <section class="slide title-slide">
+    <div class="kicker">Thank You</div>
+    <h1>谢谢聆听</h1>
+    <div class="rule"></div>
+    <div class="subtitle">参考文献：Macedo F, Rocha M, Lucas J, Rodrigues LF, Varanda P, Ribeiro E.<br>
+    Tardy Posterior Interosseous Nerve Palsy as a Complication of Unreduced Monteggia Fracture: A Case Report and Literature Review.</div>
+    <div class="meta"><strong>Hayson Wong</strong> · WNMC Hand and Foot &amp; Ankle Department</div>
+  </section>
+
+</div>
+
+<button id="prevBtn" class="nav-btn" title="上一页">‹</button>
+<button id="nextBtn" class="nav-btn" title="下一页">›</button>
+<button id="fullscreenBtn" title="全屏">⛶ 全屏</button>
+<div id="counter">1 / 20</div>
+
+<script>
+(function () {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let current = 0;
+
+  const progressBar = document.getElementById('progress-bar');
+  const counter = document.getElementById('counter');
+
+  function showSlide(n) {
+    current = (n + total) % total;
+    slides.forEach((s, i) => s.classList.toggle('active', i === current));
+    progressBar.style.width = ((current + 1) / total * 100) + '%';
+    counter.textContent = (current + 1) + ' / ' + total;
+  }
+
+  function next() { showSlide(current + 1); }
+  function prev() { showSlide(current - 1); }
+
+  document.getElementById('nextBtn').addEventListener('click', next);
+  document.getElementById('prevBtn').addEventListener('click', prev);
+
+  // 键盘导航
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') { showSlide(0); }
+    else if (e.key === 'End') { showSlide(total - 1); }
+    else if (e.key === 'f' || e.key === 'F') { toggleFullscreen(); }
+  });
+
+  // 点击翻页（忽略按钮/链接/表格等交互元素）
+  document.getElementById('deck').addEventListener('click', function (e) {
+    if (e.target.closest('button, a, table, .figure, input, select, textarea')) return;
+    next();
+  });
+
+  // 触摸滑动
+  let touchStartX = 0, touchStartY = 0;
+  document.addEventListener('touchstart', function (e) {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    const dy = e.changedTouches[0].screenY - touchStartY;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      dx < 0 ? next() : prev();
+    }
+  }, { passive: true });
+
+  // 全屏切换
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen && document.exitFullscreen();
+    }
+  }
+  document.getElementById('fullscreenBtn').addEventListener('click', toggleFullscreen);
+
+  showSlide(0);
+})();
+</script>
+</body>
+</html>
