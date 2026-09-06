@@ -1,7 +1,8 @@
 ---
-title: "Use of bone wax as a nail bed dressing after excision of subungual tumors"
+title: Use of bone wax as a nail bed dressing after excision of subungual tumors
 year: 2020
 type: literature
+date: 2026-09-11
 ---
 Belen de Nicolas-Ruanes, MD, Carlos Azcarraga-Llobet, MD, and Juan Jimenez-Cauhe, MD
 
