@@ -3,12 +3,8 @@ title: "Use of bone wax as a nail bed dressing after excision of subungual tumor
 year: 2020
 type: literature
 ---
-# Use of bone wax as a nail bed dressing after excision of subungual tumors
 
 Belen de Nicolas-Ruanes, MD, Carlos Azcarraga-Llobet, MD, and Juan Jimenez-Cauhe, MD
-
-Key words: bone wax; dermatologic surgery; nail; nail bed; nail surgery; subungual tumor; wound healing.
-
 ## CLINICAL CHALLENGE
 
 Nail plate replacement stands as the last step in nail surgery involving subungual tumors. However, the nail plate can occasionally be damaged or fractured during surgery or by the tumor itself, or it may be sent for histopathological analysis, so it cannot be repositioned after excision (Fig 1, A). In those cases, one of the proposed options is the use of a sterile semirigid plastic as a synthetic nail plate, such as suture packages.
