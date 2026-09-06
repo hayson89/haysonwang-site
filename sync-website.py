@@ -70,7 +70,7 @@ def final_htm_url(target_folder, htm_filename):
     n = os.path.splitext(web_slug(htm_filename))[0]
     if n == d:
         n = "index"
-    return "/research/%s/%s.htm" % (d, n)
+    return "/%s/%s/%s.htm" % (target_folder, d, n)
 
 
 # ---------- PowerShell 脚本残留清理 ----------
@@ -226,8 +226,8 @@ def resolve_image_ref(folder, raw):
     abs_f = find_vault_file(raw_dec)
     if abs_f:
         return import_image_to_folder(folder, abs_f)
-    # 4) 引用其他文章文件夹（research/xxx/images/yyy.jpg）
-    m = re.search(r"research/[^/]+/images/([^/]+)$", raw_dec, re.IGNORECASE)
+    # 4) 引用其他文章文件夹（如 research/xxx/images/yyy.jpg 或 nail-disease/xxx/images/yyy.jpg）
+    m = re.search(r"(?:research|nail-disease|education|clinical)/[^/]+/images/([^/]+)$", raw_dec, re.IGNORECASE)
     if m:
         hit = case_insensitive_find(folder, m.group(1))
         if hit:

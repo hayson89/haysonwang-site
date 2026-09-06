@@ -1,8 +1,13 @@
 @echo off
+chcp 65001 >nul
 title Publish haysonwang.com
 
 echo ============================
 echo Publish haysonwang.com
+echo ============================
+echo.
+echo 栏目: 甲病专题 / 健康教育 / 临床实践 / 医学研究
+echo 状态: 扁平化目录 + 共享 images/ 文件夹
 echo ============================
 
 echo.
