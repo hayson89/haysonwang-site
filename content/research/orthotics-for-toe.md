@@ -20,13 +20,7 @@ Silicone toe props and Budin-type devices show highest effectiveness in pain rel
 
 ## INTRODUCTION
 
-Lesser toes play an important role in foot (and body) locomotion by increasing the weight-bearing area of the foot and being the last part of our anatomy to be in contact with the ground while the body is propelled forward during the third (propulsive) rocker of gait. Digits also help to stabilize the foot in uneven ground and play a crucial role in some sports and other not-so-common activities like foot painting.
-
-Incidence of lesser toe problems ranges from 2% to 20% in the general population.<sup>1</sup> Of all foot problems, those involving the lesser toes are most common, with a reported incidence of up to 20%.<sup>1,2</sup> Lesser toe deformities occur more commonly in women, and the incidence rises with advancing age, although not all are symptomatic.<sup>3</sup> They may present as isolated entities or in association with first ray deformities. There is a wide range of causes to develop lesser toe deformities. Most have a mechanical origin with a dysfunctional first ray that transfer abnormal forces to the lesser rays that ultimately develop deformities from overloading and repetitive excessive work during push off. Claw and hammer toes may cause pain because of rubbing in the dorsum of the toe, joint arthritis, and/or interphalangeal bursitis.
-
-Pain and compromised gait arising from lesser toe deformities may oblige patients to change their shoes to accommodate their deformed toes and look for podiatric or orthopedic foot and ankle advice. Conservative management should always be attempted before surgical treatment. Patients with lesser toe deformities are encouraged to wear shoes with wide toe boxes to accommodate their digits and avoid impingement of the deformed toes. Taping or strapping may improve alignment provided deformities are flexible. Padding of painful calluses with different types of orthotics may also relieve rubbing and pain over bony prominences. The clinical setting may influence the choice of the type of orthotic or shoe modification, with flexible deformities being easier to address than rigid ones. Patients with diabetes will need extra cushioning and soft materials to avoid skin problems. For an orthopedic surgeon it is surprising to realize how well some patients do with protection and offloading of painful deformities. Given the variable results of lesser toe surgery, it seems appropriate to know about the different orthotics and conservative treatments available for these deformities and their potential effect on our patients.
-
-Despite the high incidence of lesser toe disorders, their conservative treatments have rarely been studied. This study focuses on the conservative management of lesser toe deformities and will try to provide the reader with an overview on the portfolio of shoe modifications and orthotics available for the conservative treatment of lesser toe deformities, indication of each specific type of device, how they can impact on pain relief, and the rationale after considering conservative management as a first line of treatment and potentially avoiding surgery.
+ This study focuses on the conservative management of lesser toe deformities and will try to provide the reader with an overview on the portfolio of shoe modifications and orthotics available for the conservative treatment of lesser toe deformities, indication of each specific type of device, how they can impact on pain relief, and the rationale after considering conservative management as a first line of treatment and potentially avoiding surgery.
 
 ## OBJECTIVES OF CONSERVATIVE TREATMENT
 
@@ -101,19 +95,14 @@ Some of the most common lesser toe conditions that may be treated with orthotics
 
 Mallet and claw toes: Pain may result from the impaction of the distal phalanx and nail into the ground. Relieving of pressure at the distal tip of the phalanx may be
 
-![img_24](images/orthotics-img_24.jpg)  
+![img_24|287](images/orthotics-img_24.jpg)  
 Fig 2 Skin irritation and contact dermatitis as a complication of toe strapping.
 
-Downloaded for Anonymous User (n/a) at Shanghai Jiao Tong University School of Medicine from ClinicalKey.com by Elsevier on December 27, 2024. For personal use only. No other uses without permission. Copyright ©2024. Elsevier Inc. All rights reserved.
-
-![img_12](images/orthotics-img_12.jpg)
-![img_11|295](images/orthotics-img_11.jpg)
+![img_12|123](images/orthotics-img_12.jpg)![img_11|376](images/orthotics-img_11.jpg)
 
 ![img_2](images/orthotics-img_2.jpg)![184](images/orthotics-img_13.jpg)
 
-![img_9](images/orthotics-img_9.jpg)
-
-![img_25](images/orthotics-img_25.jpg)  
+![img_9|272](images/orthotics-img_9.jpg)![img_25|265](images/orthotics-img_25.jpg)  
 Fig 3 Painful hammertoe and floating deformity of the second digit: (A) dorsal view, (B) frontal view, (C) forefoot band, (D) strapping of the second toe to the band, (E) correction in frontal view, and (F) oblique view of the device.
 
 achieved using cushioned foam, gel sleeves, and/or toe crest devices, which are helpful because they elevate the toe, keeping the toe tip offloaded. Callus trimming, placement of a felt pad, and using shoes with a wide toe box and deepened heel can also reduce pressure and alleviate symptoms.<sup>22</sup> Silicone molds may also be used to reduce friction on the dorsum of the digit (Fig 4).
@@ -172,15 +161,3 @@ Ruiz-Ramos and colleagues<sup>33</sup> studied a novel device that intends to si
 ## SUMMARY
 
 Lesser toes, common problems, big troubles. Lesser toe deformities are common in our foot and ankle practice and can have a significant impact on the function of the foot and quality of life. Conservative treatment with footwear modification and orthotics should be tried before surgical treatment. Different types of shoes and adaptations are available, as well as some lesser toe orthotics. It is important to be familiar with the indications for the use of such devices. Lesser toe problems such as corns, hammertoes, tailor’s bunions, mallet and claw toes, curly toes, crossover, underlapping, and overlapping toes can effectively be treated with lesser toe orthotics. Rocker soles can help alleviate pain from metatarsalgia and reduce mechanical work of the lesser toes. Off-the-self in-depth shoes may accommodate most lesser toe deformities, but sometimes custom-made shoes are necessary to accept both orthotics and deformities. Silicone toe props and Budin-type devices show highest effectiveness in pain relieve and skin protection for most common deformities. However, there is a paucity of randomized controlled trials to guide best conservative management. Fusion of 3D printing and digital foot scanning enables the creation of bespoke devices, providing personalized orthotics that will surely make an impact on our patients.
-
-## CLINICS CARE POINTS
-
-Of all foot problems, those involving the lesser toes are most common, with a reported incidence of up to 20%. Most have a mechanical origin with a dysfunctional first ray that transfer abnormal forces to the lesser rays that ultimately develop deformities.
-
-Given the variable results of lesser toe surgery, it seems appropriate to know about the different shoe adaptations, orthotics, and conservative treatments available for these deformities and their potential effect on our patients and consider them as the first line of treatment.
-
-Modifications in the box (in-depth) and sole (rocker bottom) of a shoe may be beneficial in the conservative treatment of lesser toe deformities by creating an extra space to accommodate both deformities and orthotics and by providing a mechanical effect that offloads the forefoot.
-
-Silicone toe props and Budin-type devices show highest effectiveness in pain relieve and skin protection for most common deformities, although more studies are needed to know about the optimization of these treatments.
-
-Fusion of 3D printing and digital foot scanning enables the creation of individualized bespoke solutions, potentially providing a better effect with less complications and many of our patients avoiding or delaying surgery.
