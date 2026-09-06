@@ -6,12 +6,6 @@ title: 硅胶分趾垫在前足畸形矫正中的作用
 
 Manuel Monteagudo, MD<sup>a,b,</sup>\*, Ángel M. Orejana, DPM, PhD<sup>a,c</sup>
 
-## KEYWORDS
-
- Orthotics  Lesser toe  Deformity  Hammertoe  Mallet  Shoewear
-
- Conservative
-
 ## KEY POINTS
 
 Of all foot problems, those involving the lesser toes are most common, with a reported incidence of up to 20%. Lesser toe deformities occur more commonly in women, and the incidence rises with advancing age, although not all are symptomatic.
@@ -113,12 +107,9 @@ Fig 2 Skin irritation and contact dermatitis as a complication of toe strapping.
 Downloaded for Anonymous User (n/a) at Shanghai Jiao Tong University School of Medicine from ClinicalKey.com by Elsevier on December 27, 2024. For personal use only. No other uses without permission. Copyright ©2024. Elsevier Inc. All rights reserved.
 
 ![img_12](images/img_12.jpg)
+![img_11|295](images/img_11.jpg)
 
-![img_11](images/img_11.jpg)
-
-![img_2](images/img_2.jpg)
-
-![img_13](images/img_13.jpg)
+![img_2](images/img_2.jpg)![184](images/img_13.jpg)
 
 ![img_9](images/img_9.jpg)
 
@@ -133,20 +124,17 @@ Curly toes, crossover, floating, underlapping, and overlapping toes: Different t
 
 Chronic keratosis is common among patients with lesser toe deformities. Conservative symptom management by callus shaving is performed with a callus file, pumice stones, scalpel, or callus blade. This is a simple and effective means of managing
 
-![img_14](images/img_14.jpg)
+![img_14](images/img_14.jpg)![img_4](images/img_4.jpg)
 
-![img_4](images/img_4.jpg)
-
-![img_5](images/img_5.jpg)  
+![img_5](images/img_5.jpg)
+  
 Fig 4 Painful rigid clawtoe deformity: (A) dorsal prominence causing painful rubbing on shoe, (B) silicone orthosis extending just proximal to the prominent area to avoid contact with shoe, and (C) omega-shaped silicone orthosis accommodating rigid clawtoes.
 
-![img_1](images/img_1.jpg)
+![img_1|234](images/img_1.jpg)![218](images/img_17.jpg)  
 
-![img_17](images/img_17.jpg)
+![img_10|207](images/img_10.jpg)![225](images/img_19.jpg)
 
-![img_10](images/img_10.jpg)
-
-![img_19](images/img_19.jpg)  
+  
 Fig 5 Painful underlapping third toe with rotation causing friction on the second toe: (A) frontal view, (B) frontal view with custom-made silicone spacer correcting the deformed digit, (C) dorsal view, and (D) dorsal view with silicone spacer.
 
 this painful condition, although treatment also needs to focus on the primary cause for metatarsalgia.<sup>23</sup> Hard skin should be applied with moisturizing cream daily and regular use of a foot file, alternatively contact a local podiatrist for treatment. Rehabilitation and the use of injections is beyond the scope of the present article.
@@ -155,25 +143,14 @@ this painful condition, although treatment also needs to focus on the primary ca
 
 There is a paucity of studies to guide best conservative management of lesser toe deformities. Most of the studies analyzed had short-term follow-up, low number of patients, case reports, and not many are prospective and randomized. Most claimed effects—prevent ankle sprains, improve blood flow to the plantar fascia, encourage development of intrinsic foot muscles, enhance balance, weight distribution, proprioception, dexterity—have not been proven.
 
-![img_18](images/img_18.jpg)
+![img_18|212](images/img_18.jpg)![211](images/img_20.jpg)
 
-![img_20](images/img_20.jpg)
+![img_8|210](images/img_8.jpg)![188](images/img_16.jpg)
+![img_23|215](images/img_23.jpg)![196](images/img_21.jpg)
 
-![img_8](images/img_8.jpg)
+![img_6|211](images/img_6.jpg)![img_3|238](images/img_3.jpg)
 
-![img_16](images/img_16.jpg)
-
-![img_23](images/img_23.jpg)
-
-![img_21](images/img_21.jpg)
-
-![img_6](images/img_6.jpg)
-
-![img_3](images/img_3.jpg)
-
-![img_7](images/img_7.jpg)
-
-![img_22](images/img_22.jpg)  
+![img_7|216](images/img_7.jpg)![img_22|175](images/img_22.jpg)  
 Fig 6 Curly overlapping fifth toe in a 4 year old patient. Orthoses are changed every 3 months in children aged under 5 years and every 6 months in children aged over 5 years: (A) frontal view of deformity, (B) correction with custom-made silicone orthosis, (C) dorsal view of the deformity, (D) dorsal view with orthosis, (E) after 3 months of conservative treatment, (F) a new custom-made silicone orthosis help to continue correction of the deformity, (G) dorsal view at 6 months, and (H) oblique view at 6 months, (I) frontal view 1 year from the initiation of orthotic treatment, and (J) dorsal view of the final correction.
 
 Many of the studies on conservative treatment of lesser toe deformities are case reports. There is no consensus regarding treatment of lesser toe deformities. Wide variations in definitions and strategies have been demonstrated in some countries.<sup>24</sup> So many of the studies in the literature are cases series and biased. These include taping for predislocation syndrome,<sup>21</sup> second metatarsophalangeal joint instability,<sup>25,26</sup> hammer toe,<sup>20</sup> or acute mallet toe. 27
@@ -207,77 +184,3 @@ Modifications in the box (in-depth) and sole (rocker bottom) of a shoe may be be
 Silicone toe props and Budin-type devices show highest effectiveness in pain relieve and skin protection for most common deformities, although more studies are needed to know about the optimization of these treatments.
 
 Fusion of 3D printing and digital foot scanning enables the creation of individualized bespoke solutions, potentially providing a better effect with less complications and many of our patients avoiding or delaying surgery.
-
-## DISCLOSURE
-
-The authors have nothing to disclose.
-
-## REFERENCES
-
-1. Coughlin MJ. Lesser toe abnormalities. An Instructional course lecture. American Academy of Orthopaedic Surgeons. J Bone Joint Surg Am 2002;84A(8):1446–69.
-
-2. Chadwick C, Saxby TS. Hammertoes/Clawtoes: metatarsophalangeal joint correction. Foot Ankle Clin 2011;16(4):559–71.
-
-3. Frey-Ollivier S, Catena F, He´lix-Giordanino M, et al. Treatment of Flexible Lesser Toe Deformities. Foot Ankle Clin 2018;23(1):69–90.
-
-Downloaded for Anonymous User (n/a) at Shanghai Jiao Tong University School of Medicine from ClinicalKey.com by Elsevier on December 27, 2024. For personal use only. No other uses without permission. Copyright ©2024. Elsevier Inc. All rights reserved.
-
-4. Branthwaite H, Chockalingam N, Greenhalgh A. The effect of shoe toe box shape and volume on forefoot interdigital and plantar pressures in healthy females. J Foot Ankle Res 2013;6:28.
-
-5. Janisse DJ, Janisse EJ. Pedorthic and orthotic management of the diabetic foot. Foot Ankle Clin 2006;11(4):717–34.
-
-6. Frey C, Thompson F, Smith J, et al. American Orthopedic Foot and Ankle Society women’s shoe survey. Foot Ankle 1993;14(2):78–81.
-
-7. Kaye RA. The extra-depth toe box: a rational approach. Foot Ankle Int 1994;15(3): 146–50.
-
-8. Nawoczenski DA, Birke JA, Coleman WC. Effect of rocker sole design on plantar forefoot pressures. J Am Podiatr Med Assoc 1988;78:455–60.
-
-9. Brown D, Wertsch JJ, Harris GF, et al. Effect of rocker soles on plantar pressures. Arch Phys Med Rehabil 2004;85(1):81–6.
-
-10. Janisse D, Brown D, Wertsch J, et al. Effects of rocker soles on plantar pressures and lower extremity biomechanics. Arch Phys Med Rehabil 2004;85:81–6.
-
-11. Willwacher S, Mai P, Helwig J, et al. Does Advanced Footwear Technology Improve Track and Road Racing Performance? An Explorative Analysis Based on the 100 Best Yearly Performances in the World Between 2010 and 2022. Sports Med Open 2024;10(1):14.
-
-12. Janisse DJ, Janisse E. Shoe modification and the use of orthoses in the treatment of foot and ankle pathology. J Am Acad Orthop Surg 2008;16(3):152–8.
-
-13. Website. ISO 8549-1:2020, Prosthetics and orthotics — Vocabulary — Part 1: General terms for external limb prostheses and external orthoses. Available at: https://www.iso.org/standard/79495.html. [Accessed 21 February 2024].
-
-14. Park CH, Chang MC. Forefoot disorders and conservative treatment. Yeungnam Univ J Med 2019;36(2):92–8.
-
-15. Federer AE, Tainter DM, Adams SB, et al. Conservative Management of Metatarsalgia and Lesser Toe Deformities. Foot Ankle Clin 2018;23(1):9–20.
-
-16. Bancroft RJ, McDonough T, Shakespeare J, et al. Orthotics. European Geriatric Medicine 2011;2(2):122–5.
-
-17. Hawke F, Burns J, Radford JA, et al. Custom-made foot orthoses for the treatment of foot pain. Cochrane Database Syst Rev 2008;16(3):CD006801.
-
-18. Choo YJ, Boudier-Reve´ret M, Chang MC. 3D printing technology applied to orthosis manufacturing: narrative review. Ann Palliat Med 2020;9(6):4262–70.
-
-19. Malhotra K, Davda K, Singh D. The pathology and management of lesser toe deformities. EFORT Open Rev 2017;1(11):409–19.
-
-20. Reuter BH. Taping the hammer toe. J Athl Train 1995;30(2):178–9.
-
-21. Yu GV, Judge MS, Hudson JR, et al. Predislocation syndrome. Progressive subluxation/dislocation of the lesser metatarsophalangeal joint. J Am Podiatr Med Assoc 2002;92(4):182–99.
-
-22. Molloy A, Shariff R. Mallet toe deformity. Foot Ankle Clin 2011;16(4):537–46.
-
-23. Shirzad K, Kiesau CD, DeOrio JK, et al. Lesser toe deformities. J Am Acad Orthop Surg 2011;19(8):505–14.
-
-24. Ojofeitimi S, Bronner S, Becica L. Conservative Management of Second Metatarsophalangeal Joint Instability in a Professional Dancer: A Case Report. J Orthop Sports Phys Ther 2016;46(2):114–23.
-
-25. Jordan M, Thomas M, Fischer W. Nonoperative Treatment of a Lesser Toe Plantar Plate Tear with Serial MRI Follow-up: A Case Report. J Foot Ankle Surg 2017; 56(4):857–61.
-
-26. Lancaster SC, Sizensky JA, Young CC. Acute mallet toe. Clin J Sport Med 2008; 18:298–9.
-
-27. Schrier JC, Louwerens JW, Verheyen CC. Opinions on lesser toe deformities among Dutch orthopaedic departments. Foot Ankle Int 2007;28(12):1265–70.
-
-28. Turner PL. Strapping of curly toes in children. Aust N Z J Surg 1987;57:467–70.
-
-29. Claisse PJ, Binning J, Potter J. Effect of orthotic therapy on claw toe loading: results of significance testing at pressure sensor units. J Am Podiatr Med Assoc 2004;94(3):246–54.
-
-30. Johnson S, Branthwaite H, Naemi R, et al. The effect of three different toe props on plantar pressure and patient comfort. J Foot Ankle Res 2012;5(1):22.
-
-31. Chadchavalpanichaya N, Katchamart W, Charatrungolan T, et al. The efficacy of adjustable toe splint on decreasing metatarsalgia in patients with lesser toe deformity: a prospective, randomized single-blinded controlled trial. J Med Assoc Thai 2012;95(12):1575–82.
-
-32. Formosa C, Grixti C, Gatt A. Conservative Approach in the Management of Lesser Toe Deformities in Older Adults. J Am Podiatr Med Assoc 2022;112(3): 20–274.
-
-33. Ruiz-Ramos M, Orejana-Garcı´a A<sup>´</sup> M, Vives-Merino I, et al. Effectiveness of the Fixtoe Device in plantar pressure reduction: a preliminary study. BMC Muscoskel Disord 2022;23(1):475.
