@@ -17,17 +17,17 @@ date: 2026-08-22
 
 但实际上，其中一部分患者可能患有一种少见的甲疾病——**阻生甲（Retronychia）**。
 ## 如果你的趾甲是这样
-![[retronychia_redness.jpg|319]]
+![319](images/retronychia_redness.jpg)
 > 单侧趾甲出现分层、变黄、生长迟滞，伴有近端甲皱襞红肿、疼痛，严重时可出现破溃、流脓。
 ## 或者是这样
 
-![[typical_retronychia_layer_by_layer3.png|549]]
+![549](images/typical_retronychia_layer_by_layer3.png)
 > 双侧足拇趾甲板变黄、分层堆叠，趾甲长期无修剪。
 ## 严重时可能出现这样的表现
-![[retronychia_with_proximal_paraonychia.png]]
+![retronychia_with_proximal_paraonychia](images/retronychia_with_proximal_paraonychia.png)
 > 趾甲明显变黄、增厚，近端甲皱襞红肿、疼痛，并可能伴有肉芽组织形成。
 ## 少数情况下，拇指也可能发生
-![[retronychia_thumb.png]]
+![retronychia_thumb](images/retronychia_thumb.png)
 > 右拇指外伤后出现指甲分层、颜色变黑，生长停滞。
 ## 这些表现，可能都是阻生甲
 
@@ -41,7 +41,7 @@ date: 2026-08-22
 
 ## 为什么会发生阻生甲？
 
-![[pathology_of_retronychia.png|516]]
+![516](images/pathology_of_retronychia.png)
 
 阻生甲可能由外伤、反复微损伤或炎症刺激导致：
 - 甲板、甲基质、甲床,之间的正常关系发生改变

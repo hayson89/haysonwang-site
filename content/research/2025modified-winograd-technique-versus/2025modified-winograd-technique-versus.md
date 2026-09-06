@@ -1,3 +1,8 @@
+---
+title: "Modified Winograd technique versus partial resection with electrocoagulation for surgical management of ingrown toenails"
+date: 2026-09-06
+---
+
 RESEARCH
 
 Open Access

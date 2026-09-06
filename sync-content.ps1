@@ -1,23 +1,24 @@
 ﻿# ============================================================
-# 统一发布入口（2026-09-05 起取代旧的 robocopy 直镜像流程）
-# 实际逻辑全部在 sync-research.py 中：
-#   1. 05_Research -> 08_Website/research 变换（图片小写化、
-#      相对路径改写、htm 链接修正、清理脚本残留）
-#   2. 08_Website -> content 镜像（robocopy /MIR）
-#   3. 运行 publish.py（frontmatter publish: true 的笔记）
+# sync-content.ps1 — 统一同步入口（2026-09-06）
+# 职责：调用 sync-website.py 引擎完成
+#   1. 规范化 08_Website（图片名 slug 化、引用改相对路径、
+#      htm 链接修正、清理脚本残留；从 05_Research 复制来的
+#      内容路径不规范会被自动修好）
+#   2. robocopy /MIR 镜像 08_Website -> quartz/content
 #
 # 用法：
-#   双击本文件 / .\sync-content.ps1        完整同步（默认，不推送）
-#   .\sync-content.ps1 -dry                演练模式，不写任何文件
-#   .\sync-content.ps1 -build              同步后本地构建 public/
-#   .\sync-content.ps1 -push               同步后 git 提交并推送上线
-#   （-push 与 -build 可同时使用）
+#   双击 / 右键运行                规范化 + 镜像（不上线）
+#   .\sync-content.ps1 -dry       演练，不写任何文件
+#   .\sync-content.ps1 -build     同步后本地构建验证
+# 流程位置：手动复制到 08_Website -> 本脚本 -> preview.bat 预览
+#           -> publish.bat 推送上线
 # ============================================================
+param([switch]$NoPause)
 
 $python = "C:\Users\Hayson\.workbuddy\binaries\python\envs\default\Scripts\python.exe"
-$script = Join-Path $PSScriptRoot "sync-research.py"
+$script = Join-Path $PSScriptRoot "sync-website.py"
 
-Write-Host "统一同步: 05_Research -> 08_Website -> content -> publish ..." -ForegroundColor Cyan
+Write-Host "同步 08_Website -> quartz/content ..." -ForegroundColor Cyan
 & $python $script @args
 $code = $LASTEXITCODE
 
@@ -27,5 +28,5 @@ if ($code -ne 0) {
     Write-Host "同步完成" -ForegroundColor Green
 }
 
-Read-Host "按回车键退出"
+if (-not $NoPause) { Read-Host "按回车键退出" }
 exit $code
