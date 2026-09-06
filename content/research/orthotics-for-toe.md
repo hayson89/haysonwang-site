@@ -40,7 +40,7 @@ Off-the-self shoes used for diabetic feet are manufactured in multiple in-depths
 
 When the patient is unable to wear off-the-shelf shoes, the alternative is a custommade shoe, fabricated by the creation of a positive model (“last”) from a mold of the patient’s foot. The shoe is then made around this last to offer the best possible adaptation to the deformities although at a cost with respect to conventional off-the-shelf shoes. Poor cosmetics may also be an issue with custom-made shoes and noncompliance
 
-![img_15](images/img_15.jpg)  
+![img_15](images/orthotics-img_15.jpg)  
 Fig 1 A Brannock device should be used to measure foot length and arch length and width to get a properly fitted shoe.
 
 Downloaded for Anonymous User (n/a) at Shanghai Jiao Tong University School of Medicine from ClinicalKey.com by Elsevier on December 27, 2024. For personal use only. No other uses without permission. Copyright ©2024. Elsevier Inc. All rights reserved.
@@ -101,19 +101,19 @@ Some of the most common lesser toe conditions that may be treated with orthotics
 
 Mallet and claw toes: Pain may result from the impaction of the distal phalanx and nail into the ground. Relieving of pressure at the distal tip of the phalanx may be
 
-![img_24](images/img_24.jpg)  
+![img_24](images/orthotics-img_24.jpg)  
 Fig 2 Skin irritation and contact dermatitis as a complication of toe strapping.
 
 Downloaded for Anonymous User (n/a) at Shanghai Jiao Tong University School of Medicine from ClinicalKey.com by Elsevier on December 27, 2024. For personal use only. No other uses without permission. Copyright ©2024. Elsevier Inc. All rights reserved.
 
-![img_12](images/img_12.jpg)
-![img_11|295](images/img_11.jpg)
+![img_12](images/orthotics-img_12.jpg)
+![img_11|295](images/orthotics-img_11.jpg)
 
-![img_2](images/img_2.jpg)![184](images/img_13.jpg)
+![img_2](images/orthotics-img_2.jpg)![184](images/orthotics-img_13.jpg)
 
-![img_9](images/img_9.jpg)
+![img_9](images/orthotics-img_9.jpg)
 
-![img_25](images/img_25.jpg)  
+![img_25](images/orthotics-img_25.jpg)  
 Fig 3 Painful hammertoe and floating deformity of the second digit: (A) dorsal view, (B) frontal view, (C) forefoot band, (D) strapping of the second toe to the band, (E) correction in frontal view, and (F) oblique view of the device.
 
 achieved using cushioned foam, gel sleeves, and/or toe crest devices, which are helpful because they elevate the toe, keeping the toe tip offloaded. Callus trimming, placement of a felt pad, and using shoes with a wide toe box and deepened heel can also reduce pressure and alleviate symptoms.<sup>22</sup> Silicone molds may also be used to reduce friction on the dorsum of the digit (Fig 4).
@@ -124,15 +124,15 @@ Curly toes, crossover, floating, underlapping, and overlapping toes: Different t
 
 Chronic keratosis is common among patients with lesser toe deformities. Conservative symptom management by callus shaving is performed with a callus file, pumice stones, scalpel, or callus blade. This is a simple and effective means of managing
 
-![img_14](images/img_14.jpg)![img_4](images/img_4.jpg)
+![img_14](images/orthotics-img_14.jpg)![img_4](images/orthotics-img_4.jpg)
 
-![img_5](images/img_5.jpg)
+![img_5](images/orthotics-img_5.jpg)
   
 Fig 4 Painful rigid clawtoe deformity: (A) dorsal prominence causing painful rubbing on shoe, (B) silicone orthosis extending just proximal to the prominent area to avoid contact with shoe, and (C) omega-shaped silicone orthosis accommodating rigid clawtoes.
 
-![img_1|234](images/img_1.jpg)![218](images/img_17.jpg)  
+![img_1|234](images/orthotics-img_1.jpg)![218](images/orthotics-img_17.jpg)  
 
-![img_10|207](images/img_10.jpg)![225](images/img_19.jpg)
+![img_10|207](images/orthotics-img_10.jpg)![225](images/orthotics-img_19.jpg)
 
   
 Fig 5 Painful underlapping third toe with rotation causing friction on the second toe: (A) frontal view, (B) frontal view with custom-made silicone spacer correcting the deformed digit, (C) dorsal view, and (D) dorsal view with silicone spacer.
@@ -143,14 +143,14 @@ this painful condition, although treatment also needs to focus on the primary ca
 
 There is a paucity of studies to guide best conservative management of lesser toe deformities. Most of the studies analyzed had short-term follow-up, low number of patients, case reports, and not many are prospective and randomized. Most claimed effects—prevent ankle sprains, improve blood flow to the plantar fascia, encourage development of intrinsic foot muscles, enhance balance, weight distribution, proprioception, dexterity—have not been proven.
 
-![img_18|212](images/img_18.jpg)![211](images/img_20.jpg)
+![img_18|212](images/orthotics-img_18.jpg)![211](images/orthotics-img_20.jpg)
 
-![img_8|210](images/img_8.jpg)![188](images/img_16.jpg)
-![img_23|215](images/img_23.jpg)![196](images/img_21.jpg)
+![img_8|210](images/orthotics-img_8.jpg)![188](images/orthotics-img_16.jpg)
+![img_23|215](images/orthotics-img_23.jpg)![196](images/orthotics-img_21.jpg)
 
-![img_6|211](images/img_6.jpg)![img_3|238](images/img_3.jpg)
+![img_6|211](images/orthotics-img_6.jpg)![img_3|238](images/orthotics-img_3.jpg)
 
-![img_7|216](images/img_7.jpg)![img_22|175](images/img_22.jpg)  
+![img_7|216](images/orthotics-img_7.jpg)![img_22|175](images/orthotics-img_22.jpg)  
 Fig 6 Curly overlapping fifth toe in a 4 year old patient. Orthoses are changed every 3 months in children aged under 5 years and every 6 months in children aged over 5 years: (A) frontal view of deformity, (B) correction with custom-made silicone orthosis, (C) dorsal view of the deformity, (D) dorsal view with orthosis, (E) after 3 months of conservative treatment, (F) a new custom-made silicone orthosis help to continue correction of the deformity, (G) dorsal view at 6 months, and (H) oblique view at 6 months, (I) frontal view 1 year from the initiation of orthotic treatment, and (J) dorsal view of the final correction.
 
 Many of the studies on conservative treatment of lesser toe deformities are case reports. There is no consensus regarding treatment of lesser toe deformities. Wide variations in definitions and strategies have been demonstrated in some countries.<sup>24</sup> So many of the studies in the literature are cases series and biased. These include taping for predislocation syndrome,<sup>21</sup> second metatarsophalangeal joint instability,<sup>25,26</sup> hammer toe,<sup>20</sup> or acute mallet toe. 27
