@@ -1,5 +1,6 @@
 ---
 date: 2026-09-04
+title: 硅胶分趾垫在前足畸形矫正中的作用
 ---
 # Orthotics for the Treatment of Lesser Toe Deformities
 

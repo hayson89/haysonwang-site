@@ -1,5 +1,5 @@
 ---
-title: ingrown-nail-controversies-slides
+title: Ingrown nail controversies slides
 date: 2026-08-16
 ---
 ### 文献讲义与幻灯片
