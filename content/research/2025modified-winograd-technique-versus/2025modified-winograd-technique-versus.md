@@ -7,10 +7,6 @@ RESEARCH
 
 Open Access
 
-# Modified Winograd technique versus partial resection with electrocoagulation for surgical management of ingrown toenails
-
-    
-
 Soner Kocak<sup>1\*</sup>    and Ali Ozyalcin
 
 ## Abstract

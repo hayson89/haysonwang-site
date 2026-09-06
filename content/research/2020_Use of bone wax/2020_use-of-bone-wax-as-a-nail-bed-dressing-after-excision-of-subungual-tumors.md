@@ -3,8 +3,6 @@ title: "Use of bone wax as a nail bed dressing after excision of subungual tumor
 year: 2020
 type: literature
 ---
-# Use of bone wax as a nail bed dressing after excision of subungual tumors
-
 Belen de Nicolas-Ruanes, MD, Carlos Azcarraga-Llobet, MD, and Juan Jimenez-Cauhe, MD
 
 Key words: bone wax; dermatologic surgery; nail; nail bed; nail surgery; subungual tumor; wound healing.

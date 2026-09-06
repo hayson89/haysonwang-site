@@ -1,4 +1,3 @@
-# A new and simple suturing technique applied after surgery to correct ingrown toenails may improve clinical outcomes: A randomized controlled trial
 
 Esat Uygur <sup>a,</sup> <sup>\*</sup>, Engin Çarkçi <sup>a</sup>, Ahmet S¸ enel <sup>b</sup>, Bahattin Kemah <sup>c</sup>, Yalçın Turhan
 
