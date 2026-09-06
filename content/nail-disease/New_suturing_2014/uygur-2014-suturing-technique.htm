@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>甲沟炎术后改良缝合法的 RCT 解读 · 科室讲课</title>
+<style>
+  :root {
+    --bg: #f6f8fb;
+    --panel: #ffffff;
+    --ink: #1f2a44;
+    --ink-soft: #4b5876;
+    --muted: #8893ad;
+    --accent: #0b6bcb;
+    --accent-soft: #e8f1fb;
+    --accent-2: #0f9d8b;
+    --warn: #c0392b;
+    --good: #1f8a4c;
+    --line: #e3e8f0;
+    --shadow: 0 10px 40px rgba(20, 35, 70, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+
+  /* ---------- Deck layout ---------- */
+  .deck {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+  }
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: 56px 80px 80px 80px;
+    background: var(--bg);
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+    pointer-events: none;
+    overflow: auto;
+  }
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+  .slide.prev { transform: translateX(-40px); }
+
+  .slide-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .topbar .tag {
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .topbar .src {
+    font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+    color: var(--ink-soft);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 12px;
+  }
+
+  /* ---------- Typography ---------- */
+  h1.title {
+    font-size: 56px;
+    line-height: 1.15;
+    margin: 12px 0 8px;
+    color: var(--ink);
+  }
+  h1.title .em { color: var(--accent); }
+  h2.section {
+    font-size: 38px;
+    line-height: 1.2;
+    margin: 0 0 8px;
+  }
+  h3.subtitle {
+    font-size: 20px;
+    color: var(--ink-soft);
+    margin: 0 0 32px;
+    font-weight: 500;
+  }
+  .lead {
+    font-size: 19px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    max-width: 920px;
+  }
+  ul.bullets {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+  ul.bullets li {
+    position: relative;
+    padding: 10px 0 10px 32px;
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink);
+    border-bottom: 1px dashed var(--line);
+  }
+  ul.bullets li:last-child { border-bottom: none; }
+  ul.bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 21px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  ul.bullets li.green::before { background: var(--good); }
+  ul.bullets li.red::before { background: var(--warn); }
+  ul.bullets li.teal::before { background: var(--accent-2); }
+
+  /* ---------- Cover ---------- */
+  .cover .slide-inner {
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .cover h1.title { font-size: 64px; }
+  .cover .meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .cover .meta .pill {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 10px 18px;
+    border-radius: 999px;
+    color: var(--ink-soft);
+    font-size: 14px;
+    box-shadow: var(--shadow);
+  }
+  .cover .meta .pill strong { color: var(--ink); }
+  .cover .quote {
+    margin-top: 56px;
+    padding: 24px 28px;
+    background: var(--panel);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    max-width: 880px;
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.7;
+    box-shadow: var(--shadow);
+  }
+  .cover .footer-tip {
+    position: absolute;
+    bottom: 24px;
+    left: 80px;
+    right: 80px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  /* ---------- Two-column grid ---------- */
+  .grid {
+    display: grid;
+    gap: 28px;
+  }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .card {
+    background: var(--panel);
+    border-radius: 14px;
+    padding: 24px 26px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+  .card .label {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .card h3 {
+    margin: 8px 0 14px;
+    font-size: 22px;
+    color: var(--ink);
+  }
+  .card p, .card li { color: var(--ink-soft); line-height: 1.6; font-size: 15px; }
+  .card .big {
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .card .big .unit { font-size: 16px; color: var(--muted); margin-left: 4px; font-weight: 500; }
+  .card.accent { border-top: 4px solid var(--accent); }
+  .card.good    { border-top: 4px solid var(--good); }
+  .card.warn    { border-top: 4px solid var(--warn); }
+  .card.teal    { border-top: 4px solid var(--accent-2); }
+
+  /* ---------- Image plate ---------- */
+  .imgplate {
+    background: var(--panel);
+    border-radius: 14px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+  .imgplate img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+  .imgplate .cap {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+  }
+
+  /* ---------- Tables ---------- */
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--panel);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 15px;
+  }
+  table.data th, table.data td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+  table.data thead th {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 700;
+    border-bottom: 2px solid var(--accent);
+  }
+  table.data tbody tr:nth-child(even) { background: #f9fbff; }
+  table.data td.num { text-align: center; font-variant-numeric: tabular-nums; }
+  table.data td.p { text-align: center; font-weight: 700; color: var(--accent); }
+  table.data caption {
+    text-align: left;
+    color: var(--muted);
+    padding: 8px 4px;
+    font-size: 12px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Comparison ---------- */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .compare .panel {
+    background: var(--panel);
+    border-radius: 14px;
+    padding: 24px 26px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .compare .panel.new { border-top: 5px solid var(--accent); }
+  .compare .panel.old { border-top: 5px solid var(--muted); }
+  .compare .badge {
+    position: absolute;
+    top: -14px;
+    right: 22px;
+    background: var(--accent);
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+  }
+  .compare .panel.old .badge { background: var(--muted); }
+  .compare .panel h4 {
+    margin: 0 0 8px;
+    font-size: 22px;
+    color: var(--ink);
+  }
+  .compare .panel .step {
+    margin-top: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .compare .panel .step .n {
+    flex: 0 0 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .compare .panel.old .step .n { background: #eef0f4; color: var(--muted); }
+  .compare .panel .step .txt {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .compare .panel .step .txt strong { color: var(--ink); }
+
+  /* ---------- Big number bar ---------- */
+  .metric-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .metric {
+    background: var(--panel);
+    border-radius: 14px;
+    padding: 22px 22px 18px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+  .metric .k { color: var(--muted); font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; }
+  .metric .v {
+    margin-top: 8px;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .metric .v .delta { font-size: 14px; font-weight: 600; margin-left: 8px; padding: 2px 8px; border-radius: 999px; }
+  .metric .v .delta.good { color: var(--good); background: #e7f6ec; }
+  .metric .v .delta.bad { color: var(--warn); background: #fbeae8; }
+  .metric .v .delta.neu { color: var(--muted); background: #eef0f4; }
+  .metric .sub { color: var(--ink-soft); font-size: 13px; margin-top: 6px; }
+
+  /* ---------- Diagram (illustration of new technique) ---------- */
+  .diagram {
+    background: var(--panel);
+    border-radius: 14px;
+    padding: 22px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+  .diagram svg { width: 100%; height: auto; display: block; }
+
+  /* ---------- Bullets inline ---------- */
+  .info-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .info {
+    background: var(--panel);
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    padding: 14px 18px;
+    box-shadow: var(--shadow);
+  }
+  .info .k { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .info .v { font-size: 16px; color: var(--ink); margin-top: 4px; line-height: 1.5; }
+
+  /* ---------- Flow timeline ---------- */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+  }
+  .timeline .step {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 14px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .timeline .step::after {
+    content: "→";
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 18px;
+  }
+  .timeline .step:last-child::after { display: none; }
+  .timeline .step .n {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .timeline .step .t { margin-top: 10px; font-size: 14px; color: var(--ink); font-weight: 600; }
+  .timeline .step .d { margin-top: 6px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* ---------- Navigation ---------- */
+  .nav {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 10px;
+    box-shadow: var(--shadow);
+    z-index: 100;
+  }
+  .nav button {
+    background: transparent;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .nav button:hover { background: var(--accent-soft); color: var(--accent); }
+  .nav .counter {
+    color: var(--ink-soft);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .nav-edge {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 56px;
+    background: rgba(255,255,255,0.65);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    user-select: none;
+  }
+  .nav-edge:hover { background: var(--accent-soft); color: var(--accent); }
+  .nav-edge.left { left: 16px; }
+  .nav-edge.right { right: 16px; }
+
+  /* ---------- TOC ---------- */
+  .toc {
+    columns: 2;
+    column-gap: 32px;
+    margin-top: 8px;
+  }
+  .toc li {
+    break-inside: avoid;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    list-style: none;
+    border: 1px solid transparent;
+  }
+  .toc li:hover { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-soft); }
+  .toc li .num {
+    display: inline-block;
+    width: 24px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ---------- Conclusion ---------- */
+  .takeaway {
+    background: linear-gradient(135deg, #f1f8ff, #ffffff);
+    border: 1px solid var(--accent-soft);
+    border-radius: 16px;
+    padding: 26px 30px;
+    box-shadow: var(--shadow);
+  }
+  .takeaway h3 { margin: 0 0 12px; font-size: 22px; color: var(--accent); }
+  .takeaway p { margin: 0; color: var(--ink); font-size: 17px; line-height: 1.7; }
+
+  /* ---------- Reference list ---------- */
+  ol.refs {
+    padding-left: 24px;
+    color: var(--ink-soft);
+    font-size: 13px;
+    line-height: 1.7;
+    max-height: calc(100vh - 220px);
+    overflow: auto;
+  }
+  ol.refs li { padding: 4px 0; }
+
+  /* Responsive tweaks */
+  @media (max-width: 1024px) {
+    .slide { padding: 36px 36px 80px; }
+    h1.title { font-size: 40px; }
+    h2.section { font-size: 28px; }
+    .cover h1.title { font-size: 44px; }
+    .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+    .timeline { grid-template-columns: 1fr 1fr; }
+    .timeline .step::after { display: none; }
+    .metric-row { grid-template-columns: 1fr 1fr; }
+    .compare { grid-template-columns: 1fr; }
+    .nav-edge { display: none; }
+  }
+
+  /* Print-friendly */
+  @media print {
+    .nav, .nav-edge { display: none; }
+    .slide { page-break-after: always; opacity: 1 !important; transform: none !important; position: relative; height: 100vh; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ============ Slide 1: Cover ============ -->
+  <section class="slide cover active" data-title="封面">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">科室讲课 · 足踝外科文献解读</span>
+        <span class="src">Uygur et al., IJS 2016 · 随机对照试验</span>
+      </div>
+
+      <h1 class="title">甲沟炎术后<br/><span class="em">一种简单改良缝合法</span>的 RCT 解读</h1>
+      <h3 class="subtitle">A new and simple suturing technique applied after surgery to correct ingrown toenails<br/>may improve clinical outcomes: A randomized controlled trial</h3>
+
+      <div class="meta">
+        <div class="pill">📅 接收 2016-04 · 刊出 2016-08</div>
+        <div class="pill">👨‍⚕️ 土耳其 4 家医院联合研究</div>
+        <div class="pill">🔬 前瞻性 RCT · n = 128</div>
+        <div class="pill">📚 关键词：Winograd / 甲沟炎 / 复发</div>
+      </div>
+
+      <div class="quote">
+        “<strong>核心假设</strong>：把<strong>甲襞皮肤</strong>用一种改良缝合法<strong>塞到甲板下方</strong>，能否在 Winograd 术后降低复发率、提高满意度？”
+        <br/><span style="color: var(--muted); font-size: 14px;">—— Esat Uygur（通讯作者）, 2014 年首次提出该缝合法</span>
+      </div>
+
+      <div class="footer-tip">
+        <span>← / → 翻页 · 空格下一页 · Home / End 跳转首末页</span>
+        <span>© 王海生 · 科室内部分享</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 2: TOC ============ -->
+  <section class="slide" data-title="目录">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">目录</span>
+        <span class="src">Outline</span>
+      </div>
+      <h2 class="section">讲课大纲</h2>
+      <h3 class="subtitle">约 20 分钟讲完，重点放在「手术方式」「结果」「对临床的启发」</h3>
+
+      <ul class="toc">
+        <li onclick="go(0)"><span class="num">01</span> 封面 & 核心问题</li>
+        <li onclick="go(1)"><span class="num">02</span> 大纲</li>
+        <li onclick="go(2)"><span class="num">03</span> 背景：甲沟炎 & 现有方法</li>
+        <li onclick="go(3)"><span class="num">04</span> 研究目的与核心假设</li>
+        <li onclick="go(4)"><span class="num">05</span> 研究设计：前瞻性 RCT</li>
+        <li onclick="go(5)"><span class="num">06</span> 入排标准 & Heifetz 分期</li>
+        <li onclick="go(6)"><span class="num">07</span> Winograd 手术步骤</li>
+        <li onclick="go(7)"><span class="num">08</span> 改良缝合法 · 示意图</li>
+        <li onclick="go(8)"><span class="num">09</span> 改良缝合法 · 实物图 (Fig.1)</li>
+        <li onclick="go(9)"><span class="num">10</span> 传统缝合法 · 实物图 (Fig.2)</li>
+        <li onclick="go(10)"><span class="num">11</span> 围手术期管理</li>
+        <li onclick="go(11)"><span class="num">12</span> 基线资料 · Table 1</li>
+        <li onclick="go(12)"><span class="num">13</span> 主要结果 · Table 2</li>
+        <li onclick="go(13)"><span class="num">14</span> 复发分布 · Table 3</li>
+        <li onclick="go(14)"><span class="num">15</span> 并发症 · Fig.3 随访</li>
+        <li onclick="go(15)"><span class="num">16</span> 讨论与文献对照</li>
+        <li onclick="go(16)"><span class="num">17</span> 优势、局限与启示</li>
+        <li onclick="go(17)"><span class="num">18</span> 结论 & 一句话总结</li>
+        <li onclick="go(18)"><span class="num">19</span> 参考文献</li>
+        <li onclick="go(19)"><span class="num">20</span> 致谢 / 问答</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Slide 3: Background ============ -->
+  <section class="slide" data-title="背景">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">01 · 背景</span>
+        <span class="src">Background</span>
+      </div>
+      <h2 class="section">甲沟炎：常见、影响大、复发率高</h2>
+      <h3 class="subtitle">Onychocryptosis / Ingrown toenail — 多见于青少年与年轻人</h3>
+
+      <div class="grid grid-3">
+        <div class="card accent">
+          <div class="label">流行病学</div>
+          <h3>常见 & 致劳动力损失</h3>
+          <p>骨科门诊常见病，多发于 <strong>20-30 岁</strong>；主诉为<strong>足趾疼痛、脓性渗出、行走困难</strong>，严重影响工作与上学。</p>
+        </div>
+        <div class="card teal">
+          <div class="label">保守治疗</div>
+          <h3>仅适用于轻中度</h3>
+          <p>① 胶带牵拉 (Taping)<br/>② 棉片填塞 (Packing)<br/>③ 沟槽置入 (Gutter)<br/>④ 指甲矫形器 (Nail brace)</p>
+        </div>
+        <div class="card warn">
+          <div class="label">手术治疗</div>
+          <h3>方法多，复发率高</h3>
+          <p>① 部分拔甲 / 全拔甲<br/>② 楔形切除 (Winograd)<br/>③ 甲襞切除<br/>④ 化学甲床切除术 (苯酚)</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;" class="card">
+        <div class="label">关键文献事实</div>
+        <h3>Winograd 法自 1929 年提出至今仍为主流术式</h3>
+        <p>Winograd 报告「无复发」，但后续文献复发率 <strong>0–20%</strong>；苯酚法虽复发率低，但存在感染、酒精灼伤风险。<strong>目前对最佳术式仍无共识</strong>。</p>
+        <p style="color: var(--muted); margin-top: 8px;">Recurrence rates after operation: <strong>1.7% – 27%</strong> · 文献 [6,14]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 4: Research question ============ -->
+  <section class="slide" data-title="研究目的">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">02 · 研究目的</span>
+        <span class="src">Aim & Hypothesis</span>
+      </div>
+      <h2 class="section">一个反直觉的假设：<span style="color: var(--accent);">让皮肤钻进甲下</span></h2>
+      <h3 class="subtitle">如果把甲襞皮肤「塞到甲板下面」，能否减少新生甲再嵌入皮肤？</h3>
+
+      <div class="grid grid-2">
+        <div class="card accent">
+          <div class="label">核心假设</div>
+          <h3>甲襞皮肤位于甲板下方</h3>
+          <p>传统缝合把甲襞皮肤<strong>留在甲板外侧</strong>，新生甲长出时仍可能<strong>嵌入</strong>软组织。</p>
+          <p style="margin-top: 12px;">Uygur 2014 提出一种简单缝合：把<strong>甲襞皮肤固定在甲板下方</strong>，从源头减少甲-皮接触。</p>
+        </div>
+        <div class="card good">
+          <div class="label">研究目标</div>
+          <h3>比较新法 vs 传统法</h3>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li class="green">复发率 (Recurrence)</li>
+            <li class="green">复工 / 复学时间</li>
+            <li class="green">能穿鞋时间</li>
+            <li class="green">患者满意度（高/中/低）</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;" class="takeaway">
+        <h3>一句话研究问题</h3>
+        <p>在 Winograd 术完成后，<strong>使用一种简单改良缝合</strong>（把甲襞皮肤塞入甲下）<strong>是否比传统缝合</strong>带来更低复发率与更高满意度？</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 5: Study design ============ -->
+  <section class="slide" data-title="研究设计">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">03 · 研究设计</span>
+        <span class="src">Study Design</span>
+      </div>
+      <h2 class="section">前瞻性、随机、对照试验</h2>
+      <h3 class="subtitle">Prospective, Randomized, Controlled Trial · 2015 年通过伦理审批</h3>
+
+      <div class="grid grid-4" style="margin-top: 12px;">
+        <div class="card">
+          <div class="label">样本量</div>
+          <div class="big">128<span class="unit">例</span></div>
+          <p style="font-size: 13px; color: var(--muted);">每组 64（Cohen's d = 0.5, 80% 检验效能）</p>
+        </div>
+        <div class="card">
+          <div class="label">完成随访</div>
+          <div class="big">124<span class="unit">例</span></div>
+          <p style="font-size: 13px; color: var(--muted);">4 人迁居失访；Group I = 64 / Group II = 60</p>
+        </div>
+        <div class="card">
+          <div class="label">随访时长</div>
+          <div class="big">14.1<span class="unit">月</span></div>
+          <p style="font-size: 13px; color: var(--muted);">12 – 20 个月；术后 ≥ 12 个月电话随访</p>
+        </div>
+        <div class="card">
+          <div class="label">术者</div>
+          <div class="big">2<span class="unit">人</span></div>
+          <p style="font-size: 13px; color: var(--muted);">一患一术者；两位术者均参与两组手术</p>
+        </div>
+      </div>
+
+      <div class="grid grid-2" style="margin-top: 24px;">
+        <div class="card">
+          <div class="label">Group I（试验组）</div>
+          <h3>改良缝合法</h3>
+          <p>Winograd 术后用<strong>新缝合法</strong>关闭伤口。<br/>n = 64 · 平均年龄 22.1 ± 8.4 岁</p>
+        </div>
+        <div class="card">
+          <div class="label">Group II（对照组）</div>
+          <h3>传统缝合法</h3>
+          <p>Winograd 术后用<strong>传统缝合法</strong>关闭伤口。<br/>n = 60 · 平均年龄 23.9 ± 11.2 岁</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;" class="card">
+        <div class="label">随访节点</div>
+        <div class="timeline" style="margin-top: 12px;">
+          <div class="step"><span class="n">1</span><div class="t">术后 2 周</div><div class="d">拆线 + 询问穿鞋 / 复工时间</div></div>
+          <div class="step"><span class="n">2</span><div class="t">术后 1 月</div><div class="d">再次询问复工 / 复学时间</div></div>
+          <div class="step"><span class="n">3</span><div class="t">术后 6 月</div><div class="d">门诊复诊评估复发</div></div>
+          <div class="step"><span class="n">4</span><div class="t">术后 6 月+</div><div class="d">门诊 + 电话采集最终数据</div></div>
+          <div class="step"><span class="n">5</span><div class="t">≥ 12 月</div><div class="d">电话主动报告复发情况</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 6: Inclusion/Exclusion ============ -->
+  <section class="slide" data-title="入排标准">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">04 · 入排标准</span>
+        <span class="src">Inclusion / Exclusion</span>
+      </div>
+      <h2 class="section">Heifetz 分期 & 严格入排标准</h2>
+      <h3 class="subtitle">Heifetz 1945 年提出，至今仍是最常用的临床分级</h3>
+
+      <div class="grid grid-2">
+        <div class="card good">
+          <div class="label">纳入标准</div>
+          <h3>入选条件</h3>
+          <ul class="bullets" style="margin-top: 4px;">
+            <li class="green">单侧拇趾甲沟炎（仅内侧或外侧）</li>
+            <li class="green">双侧拇趾受累 → 按两个独立病例</li>
+            <li class="green">保守治疗失败者</li>
+            <li class="green">年龄 12 – 48 岁</li>
+            <li class="green">Heifetz I / II / III 期均可</li>
+          </ul>
+        </div>
+        <div class="card warn">
+          <div class="label">排除标准</div>
+          <h3>不入选</h3>
+          <ul class="bullets" style="margin-top: 4px;">
+            <li class="red">甲真菌病 (Onychomycosis)</li>
+            <li class="red">甲剥离 (Onycholysis)</li>
+            <li class="red">营养不良性甲</li>
+            <li class="red">内外侧均受累</li>
+            <li class="red">合并外周血管病</li>
+            <li class="red">合并糖尿病</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;" class="card accent">
+        <div class="label">Heifetz 分期</div>
+        <h3>临床分级</h3>
+        <div class="grid grid-3" style="margin-top: 8px;">
+          <div class="card good" style="box-shadow: none;">
+            <div class="label">Stage I</div>
+            <h3 style="font-size: 18px;">轻度</h3>
+            <p style="font-size: 14px;">甲沟轻度红肿、压痛，无渗出。保守治疗通常有效。</p>
+          </div>
+          <div class="card" style="box-shadow: none; border-top: 4px solid #f4a261;">
+            <div class="label">Stage II</div>
+            <h3 style="font-size: 18px;">中度</h3>
+            <p style="font-size: 14px;">急性炎症、渗出、肉芽组织形成；需要手术干预。</p>
+          </div>
+          <div class="card warn" style="box-shadow: none;">
+            <div class="label">Stage III</div>
+            <h3 style="font-size: 18px;">重度</h3>
+            <p style="font-size: 14px;">慢性肉芽、肥厚性甲襞、反复感染；需口服抗生素 + 手术。</p>
+          </div>
+        </div>
+        <p style="margin-top: 12px; color: var(--muted); font-size: 13px;">📊 本研究：I 期 23% · II 期 58% · III 期 18%（两组分布无统计学差异, p = 0.965）</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 7: Winograd procedure ============ -->
+  <section class="slide" data-title="Winograd 手术">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">05 · Winograd 手术</span>
+        <span class="src">Operative technique</span>
+      </div>
+      <h2 class="section">Winograd 法的标准化操作（两组共用）</h2>
+      <h3 class="subtitle">1929 年由 Winograd 首次描述 · 部分甲板 + 甲床切除</h3>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="label">术前准备</div>
+          <h3>消炎、备皮、麻醉</h3>
+          <ul class="bullets" style="margin-top: 4px;">
+            <li>术前：甲襞按摩 + 宽松鞋 + 碘伏泡脚</li>
+            <li>Heifetz III 期：口服头孢唑林</li>
+            <li>2% 盐酸丙胺卡因趾根阻滞麻醉</li>
+            <li>术前 30 min 单剂头孢唑林</li>
+            <li>趾根部弹性止血带保证无血术野</li>
+          </ul>
+        </div>
+        <div class="card accent">
+          <div class="label">手术关键步骤</div>
+          <h3>切除 & 处理甲床</h3>
+          <ul class="bullets" style="margin-top: 4px;">
+            <li>沿甲缘做纵切口（Fig.1a, b）</li>
+            <li>切除外侧 2–3 mm 甲板 + 含炎性肉芽的楔形软组织</li>
+            <li>切口向近端延长 3–5 mm</li>
+            <li>切除甲床后，<strong>刮匙刮除甲母质</strong></li>
+            <li><strong>不用苯酚，不用电凝</strong></li>
+            <li>3-0 单丝尼龙线缝合（两组缝合方式不同）</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;" class="card teal">
+        <div class="label">本研究的"分流口"</div>
+        <h3>两组唯一的差别 → 缝合方式</h3>
+        <p>其余手术步骤完全一致。这意味着研究问题非常<strong>纯净</strong>：<strong>单纯比较"缝皮"这一动作的不同</strong>。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 8: New technique diagram ============ -->
+  <section class="slide" data-title="改良缝合 · 示意图">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">06 · 改良缝合</span>
+        <span class="src">New suturing technique</span>
+      </div>
+      <h2 class="section">改良缝合法核心：<span style="color: var(--accent);">把甲襞皮塞到甲下</span></h2>
+      <h3 class="subtitle">示意图：从趾甲横截面看，新生甲将与皮瓣相遇在甲板下方</h3>
+
+      <div class="diagram">
+        <svg viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg">
+          <!-- Skin background -->
+          <defs>
+            <linearGradient id="nailGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#fde7c2"/>
+              <stop offset="100%" stop-color="#f3c98c"/>
+            </linearGradient>
+            <linearGradient id="skinGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#ffd9d4"/>
+              <stop offset="100%" stop-color="#f4a3a3"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Title -->
+          <text x="220" y="32" font-size="18" font-weight="700" fill="#0b6bcb">新法 · 甲襞皮瓣置于甲板下方</text>
+          <text x="640" y="32" font-size="18" font-weight="700" fill="#8893ad">传统法 · 甲襞皮瓣留在甲板外侧</text>
+
+          <!-- LEFT: New technique (good) -->
+          <g transform="translate(60,60)">
+            <!-- Skin base -->
+            <path d="M 0 230 Q 60 230 120 230 L 240 230 Q 300 230 360 230 L 360 280 L 0 280 Z" fill="url(#skinGrad)" stroke="#c47a7a" stroke-width="1.5"/>
+            <!-- Nail plate (left part intact, right part removed) -->
+            <path d="M 0 60 L 180 60 Q 195 60 200 80 L 200 220 L 0 220 Z" fill="url(#nailGrad)" stroke="#b58947" stroke-width="1.5"/>
+            <!-- Removed nail area highlight -->
+            <path d="M 200 60 L 230 60 L 230 220 L 200 220 Z" fill="#f5f0e8" stroke="#b58947" stroke-width="1" stroke-dasharray="3 3"/>
+            <!-- New nail growth -->
+            <path d="M 200 80 Q 215 80 225 95 L 225 220 L 200 220 Z" fill="#fde7c2" stroke="#b58947" stroke-width="1" stroke-dasharray="2 2" opacity="0.7"/>
+            <text x="207" y="170" font-size="11" fill="#a07a30">新生甲</text>
+
+            <!-- Skin flap pulled UNDER nail -->
+            <path d="M 240 200 Q 230 195 215 200 Q 210 205 215 215 Q 230 220 245 215 Q 255 210 240 200 Z" fill="#ff8b80" stroke="#a04040" stroke-width="1.5"/>
+            <text x="155" y="190" font-size="13" font-weight="700" fill="#1f8a4c">皮肤塞到甲下 ✓</text>
+            <text x="150" y="208" font-size="11" fill="#1f8a4c">(无甲-皮嵌入空间)</text>
+
+            <!-- Suture -->
+            <line x1="240" y1="205" x2="280" y2="200" stroke="#0b6bcb" stroke-width="2"/>
+            <circle cx="280" cy="200" r="3" fill="#0b6bcb"/>
+            <text x="248" y="245" font-size="11" fill="#0b6bcb">缝合</text>
+
+            <!-- Arrow indicating "no recurrence" -->
+            <text x="20" y="320" font-size="12" fill="#1f8a4c">→ 新生甲从皮瓣上方长出，无嵌入风险</text>
+          </g>
+
+          <!-- Divider -->
+          <line x1="450" y1="50" x2="450" y2="320" stroke="#cfd6e4" stroke-dasharray="4 4"/>
+
+          <!-- RIGHT: Traditional -->
+          <g transform="translate(490,60)">
+            <!-- Skin base -->
+            <path d="M 0 230 Q 60 230 120 230 L 240 230 Q 300 230 360 230 L 360 280 L 0 280 Z" fill="url(#skinGrad)" stroke="#c47a7a" stroke-width="1.5"/>
+            <!-- Nail plate -->
+            <path d="M 0 60 L 180 60 Q 195 60 200 80 L 200 220 L 0 220 Z" fill="url(#nailGrad)" stroke="#b58947" stroke-width="1.5"/>
+            <path d="M 200 60 L 230 60 L 230 220 L 200 220 Z" fill="#f5f0e8" stroke="#b58947" stroke-width="1" stroke-dasharray="3 3"/>
+
+            <!-- Skin flap on the OUTSIDE -->
+            <path d="M 235 200 Q 250 195 270 200 Q 285 210 280 225 Q 265 230 250 225 Z" fill="#ff8b80" stroke="#a04040" stroke-width="1.5"/>
+            <text x="260" y="190" font-size="13" font-weight="700" fill="#c0392b">皮肤留在外侧 ✗</text>
+
+            <!-- New nail growing into skin -->
+            <path d="M 200 80 Q 220 80 230 100 L 240 230 Q 250 230 240 200 Q 230 195 220 200 Q 215 220 200 220 Z" fill="#fde7c2" stroke="#b58947" stroke-width="1" stroke-dasharray="2 2" opacity="0.7"/>
+            <text x="207" y="170" font-size="11" fill="#a07a30">新生甲</text>
+
+            <!-- Pain/inflammation area -->
+            <circle cx="252" cy="215" r="6" fill="#ff5252" opacity="0.6"/>
+            <text x="270" y="218" font-size="11" fill="#c0392b">嵌入 / 炎性反应</text>
+
+            <!-- Suture -->
+            <line x1="280" y1="215" x2="320" y2="218" stroke="#8893ad" stroke-width="2"/>
+            <circle cx="320" cy="218" r="3" fill="#8893ad"/>
+
+            <text x="20" y="320" font-size="12" fill="#c0392b">→ 新生甲继续嵌入甲襞皮肤 → 复发</text>
+          </g>
+        </svg>
+      </div>
+
+      <div style="margin-top: 16px;" class="card accent">
+        <div class="label">核心机理</div>
+        <h3>一缝之差，结果大不同</h3>
+        <p>把<strong>甲襞皮肤塞到甲板下面</strong>，新生甲板从皮瓣<strong>上方</strong>长出，<strong>丧失"再嵌入"的几何条件</strong>，从而降低复发率。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 9: New technique photo ============ -->
+  <section class="slide" data-title="改良缝合 · 实物">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">07 · Fig.1 · 改良缝合法</span>
+        <span class="src">New suturing technique · intraoperative</span>
+      </div>
+      <h2 class="section">改良缝合法 · 术中实拍（Fig. 1 a–e）</h2>
+      <h3 class="subtitle">从纵切口 → 切除 → 进针 → 打结 → 最终形态</h3>
+
+      <div class="imgplate">
+        <img src="images/img_4.jpg" alt="改良缝合法 Fig.1 a-e"/>
+        <div class="cap">Fig. 1. a–e：改良缝合法术中五步（纵切口、切除、进针、固定皮瓣、最终形态）</div>
+      </div>
+
+      <div class="grid grid-3" style="margin-top: 18px;">
+        <div class="card good">
+          <div class="label">a–b · 纵切口</div>
+          <h3>沿甲缘进入</h3>
+          <p>沿甲缘做纵切口，显露嵌甲侧甲板与炎性肉芽。</p>
+        </div>
+        <div class="card accent">
+          <div class="label">c–d · 进针</div>
+          <h3>把皮瓣拉到甲下</h3>
+          <p>单丝尼龙线穿过皮瓣，向甲板下方<strong>拉拢</strong>固定，形成"皮瓣塞入甲下"的效果。</p>
+        </div>
+        <div class="card teal">
+          <div class="label">e · 终态</div>
+          <h3>皮瓣位于甲下</h3>
+          <p>术后即刻：甲襞皮肤已<strong>物理性</strong>位于甲板下方，新生甲长出时不再嵌入。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 10: Traditional technique photo ============ -->
+  <section class="slide" data-title="传统缝合 · 实物">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">08 · Fig.2 · 传统缝合法</span>
+        <span class="src">Traditional suturing technique</span>
+      </div>
+      <h2 class="section">传统缝合法 · 术后外观（Fig. 2）</h2>
+      <h3 class="subtitle">皮瓣留在甲板外侧，新生甲仍有"再嵌入"的可能</h3>
+
+      <div class="grid grid-2">
+        <div class="imgplate">
+          <img src="images/img_2.jpg" alt="传统缝合法 Fig.2"/>
+          <div class="cap">Fig. 2. 传统缝合法术后表现：皮瓣在外侧</div>
+        </div>
+        <div class="card">
+          <div class="label">对比要点</div>
+          <h3>差异就藏在"一针"里</h3>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li>术中切除范围完全一致</li>
+            <li>缝合材料相同：3-0 单丝尼龙线</li>
+            <li><strong>仅缝合方式不同</strong>：传统法让皮瓣停留在甲板外侧</li>
+            <li>结果：新生甲再次嵌入 → 复发率显著更高</li>
+          </ul>
+          <p style="margin-top: 14px; color: var(--ink-soft); font-size: 14px;">📷 实物图来自原文 Fig.2 — 由土耳其 Ercis 州立医院足踝外科提供。</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 18px;" class="takeaway">
+        <h3>科室提醒</h3>
+        <p>不要小看"皮瓣位置"这一细节 —— 在本研究里，<strong>它是降低复发的关键变量</strong>。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 11: Perioperative ============ -->
+  <section class="slide" data-title="围手术期">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">09 · 围手术期管理</span>
+        <span class="src">Perioperative care</span>
+      </div>
+      <h2 class="section">简单、标准化、可复制</h2>
+      <h3 class="subtitle">两组采用完全相同的围手术期方案</h3>
+
+      <div class="grid grid-2">
+        <div class="card accent">
+          <div class="label">术前</div>
+          <h3>充分消炎</h3>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li>甲襞按摩 + 宽松鞋 + 碘伏泡脚</li>
+            <li>III 期：术前即开始口服头孢唑林</li>
+            <li>保守治疗失败 → 改行手术</li>
+          </ul>
+        </div>
+        <div class="card good">
+          <div class="label">术中</div>
+          <h3>标准麻醉 + 无菌</h3>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li>2% 丙胺卡因趾根阻滞</li>
+            <li>术前 30 min 单剂头孢唑林</li>
+            <li>弹性止血带、无血术野</li>
+            <li>3-0 单丝尼龙线（非吸收）</li>
+          </ul>
+        </div>
+        <div class="card teal">
+          <div class="label">术后</div>
+          <h3>加压包扎 + 早期活动</h3>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li>加压包扎、抬高、抗炎</li>
+            <li>III 期：术后头孢唑林 1 周</li>
+            <li>2 周拆线</li>
+            <li>鼓励尽早穿宽松鞋、复工</li>
+          </ul>
+        </div>
+        <div class="card warn">
+          <div class="label">复诊</div>
+          <h3>2 周 / 1 月 / 6 月</h3>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li>2 周：拆线 + 询问穿鞋与复工</li>
+            <li>1 月：再问复工 / 复学时间</li>
+            <li>6 月：复诊评估复发</li>
+            <li>≥ 12 月：电话随访复发</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 12: Table 1 ============ -->
+  <section class="slide" data-title="Table 1 · 基线">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">10 · Table 1 · 基线资料</span>
+        <span class="src">Demographics</span>
+      </div>
+      <h2 class="section">两组基线一致（除性别外）</h2>
+      <h3 class="subtitle">性别差异有统计学意义，但作者做了性别分层分析</h3>
+
+      <table class="data">
+        <caption>Table 1 · Demographic features of the study group</caption>
+        <thead>
+          <tr>
+            <th>项目</th><th></th>
+            <th class="num">Group I（新法, n = 64）</th>
+            <th class="num">Group II（传统法, n = 60）</th>
+            <th class="num">p</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>年龄（岁）</td><td>Mean ± SD</td><td class="num">22.1 ± 8.4</td><td class="num">23.9 ± 11.2</td><td class="p">0.793</td></tr>
+          <tr><td></td><td>青少年（12–18 岁）</td><td class="num">28 (43.8%)</td><td class="num">27 (45.0%)</td><td class="p">0.889</td></tr>
+          <tr><td></td><td>成人（≥ 19 岁）</td><td class="num">36 (56.3%)</td><td class="num">33 (55.0%)</td><td class="p"></td></tr>
+          <tr><td>性别</td><td>男</td><td class="num">33 (51.6%)</td><td class="num">50 (83.3%)</td><td class="p">&lt; 0.001</td></tr>
+          <tr><td></td><td>女</td><td class="num">31 (48.4%)</td><td class="num">10 (16.7%)</td><td class="p"></td></tr>
+          <tr><td>Heifetz 分期</td><td>I</td><td class="num">15 (23.4%)</td><td class="num">13 (21.7%)</td><td class="p">0.965</td></tr>
+          <tr><td></td><td>II</td><td class="num">37 (57.8%)</td><td class="num">36 (60.0%)</td><td class="p"></td></tr>
+          <tr><td></td><td>III</td><td class="num">12 (18.8%)</td><td class="num">11 (18.3%)</td><td class="p"></td></tr>
+          <tr><td>随访时间（月）</td><td>Mean ± SD</td><td class="num">14.5 ± 2.5</td><td class="num">13.6 ± 2.4</td><td class="p">0.132</td></tr>
+        </tbody>
+      </table>
+
+      <div class="grid grid-3" style="margin-top: 18px;">
+        <div class="card good"><div class="label">解读 ①</div><h3>基线均衡</h3><p>年龄、Heifetz 分期、随访时间均<strong>无统计学差异</strong>。</p></div>
+        <div class="card warn"><div class="label">解读 ②</div><h3>性别失衡</h3><p>传统组男性比例显著更高 (83.3% vs 51.6%, p &lt; 0.001)。</p></div>
+        <div class="card accent"><div class="label">解读 ③</div><h3>作者的对策</h3><p>进行了<strong>性别分层分析</strong>，结论稳健。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 13: Table 2 ============ -->
+  <section class="slide" data-title="Table 2 · 主要结果">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">11 · Table 2 · 主要结果</span>
+        <span class="src">Clinical outcomes</span>
+      </div>
+      <h2 class="section">核心发现：<span style="color: var(--good);">新法显著降低复发</span>、提升满意度</h2>
+      <h3 class="subtitle">复工时间略延长，但穿鞋时间相当；与年龄无关</h3>
+
+      <table class="data">
+        <caption>Table 2 · Clinical outcomes by group and age</caption>
+        <thead>
+          <tr>
+            <th>结局指标</th><th></th>
+            <th class="num">Group I</th>
+            <th class="num">Group II</th>
+            <th class="num">p（组间）</th>
+            <th class="num">青少年</th>
+            <th class="num">成人</th>
+            <th class="num">p（年龄）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>复工 / 复学时间（天）</td><td>Mean ± SD</td><td class="num">18.0 ± 4.8</td><td class="num">15.8 ± 5.59</td><td class="p">0.015</td><td class="num">16.4 ± 4.9</td><td class="num">17.4 ± 5.6</td><td class="p">0.161</td></tr>
+          <tr><td>复发 n (%)</td><td></td><td class="num">9 (14.1)</td><td class="num">20 (33.3)</td><td class="p">0.011</td><td class="num">13 (23.6)</td><td class="num">16 (23.2)</td><td class="p">0.953</td></tr>
+          <tr><td>满意度 n (%)</td><td>高</td><td class="num">56 (87.5)</td><td class="num">44 (73.3)</td><td class="p">0.042</td><td class="num">44 (80.0)</td><td class="num">56 (81.2)</td><td class="p">0.887</td></tr>
+          <tr><td></td><td>中</td><td class="num">7 (10.9)</td><td class="num">9 (15.0)</td><td class="p"></td><td class="num">8 (14.5)</td><td class="num">8 (11.6)</td><td class="p"></td></tr>
+          <tr><td></td><td>低</td><td class="num">1 (1.6)</td><td class="num">7 (11.7)</td><td class="p"></td><td class="num">3 (5.5)</td><td class="num">5 (7.2)</td><td class="p"></td></tr>
+          <tr><td>穿鞋时间（天）</td><td>Mean ± SD</td><td class="num">15.8 ± 3.6</td><td class="num">16.4 ± 8.6</td><td class="p">0.537</td><td class="num">17.2 ± 7.8</td><td class="num">15.2 ± 5.2</td><td class="p">0.244</td></tr>
+        </tbody>
+      </table>
+
+      <div class="metric-row" style="margin-top: 18px;">
+        <div class="metric">
+          <div class="k">复发率</div>
+          <div class="v">14.1%<span class="delta good">↓ vs 33.3%</span></div>
+          <div class="sub">新法 <strong>显著更低</strong>（p = 0.011）</div>
+        </div>
+        <div class="metric">
+          <div class="k">高满意度</div>
+          <div class="v">87.5%<span class="delta good">↑ vs 73.3%</span></div>
+          <div class="sub">新法更满意（p = 0.042）</div>
+        </div>
+        <div class="metric">
+          <div class="k">复工 / 复学</div>
+          <div class="v">18.0 天<span class="delta bad">↑ 2.2 天</span></div>
+          <div class="sub">新法 <strong>略长</strong>（p = 0.015）</div>
+        </div>
+        <div class="metric">
+          <div class="k">穿鞋时间</div>
+          <div class="v">15.8 天<span class="delta neu">≈ 16.4 天</span></div>
+          <div class="sub">两组相当（p = 0.537）</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 14: Table 3 ============ -->
+  <section class="slide" data-title="Table 3 · 复发分布">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">12 · Table 3 · 复发分布</span>
+        <span class="src">Recurrence allocation</span>
+      </div>
+      <h2 class="section">复发分布：传统组<strong>4 例需要二次手术</strong></h2>
+      <h3 class="subtitle">新法组 <strong>无一例需要二次手术</strong></h3>
+
+      <table class="data">
+        <caption>Table 3 · Recurrence allocation by group and age</caption>
+        <thead>
+          <tr>
+            <th>项目</th>
+            <th class="num">Group I<br/>12–18 岁 (n=28)</th>
+            <th class="num">Group I<br/>≥ 19 岁 (n=36)</th>
+            <th class="num">Group II<br/>12–18 岁 (n=27)</th>
+            <th class="num">Group II<br/>≥ 19 岁 (n=33)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>平均年龄（岁）</td><td class="num">15.53</td><td class="num">27.22</td><td class="num">15.14</td><td class="num">31</td></tr>
+          <tr><td>复发例数</td><td class="num">4</td><td class="num">5</td><td class="num">9</td><td class="num">11</td></tr>
+          <tr><td>平均复发时间（天）</td><td class="num">76</td><td class="num">52</td><td class="num">48</td><td class="num">80</td></tr>
+          <tr><td>需要抗生素治疗</td><td class="num">2</td><td class="num">3</td><td class="num">5</td><td class="num">4</td></tr>
+          <tr><td>需要二次手术</td><td class="num">—</td><td class="num">—</td><td class="num">4</td><td class="num">2</td></tr>
+        </tbody>
+      </table>
+
+      <div class="grid grid-2" style="margin-top: 18px;">
+        <div class="card good">
+          <div class="label">新法组 (I)</div>
+          <h3>无 1 例需二次手术</h3>
+          <p>9 例出现疼痛 / 压痛 / 渗出：4 例自愈，5 例口服抗生素治愈。<strong>无一例再手术</strong>。</p>
+        </div>
+        <div class="card warn">
+          <div class="label">传统组 (II)</div>
+          <h3>6 例再手术</h3>
+          <p>20 例复发患者中，<strong>4 例青少年 + 2 例成人共 6 例</strong>接受了二次手术。</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 18px;" class="takeaway">
+        <h3>复发 ≠ 再手术</h3>
+        <p>本研究的"复发"定义偏宽：任何<strong>疼痛、压痛、渗出、棘状新生</strong>均算复发。因此新法组也有 9 例"复发"，但<strong>无人需要再手术</strong>。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 15: Complications / Fig.3 ============ -->
+  <section class="slide" data-title="并发症">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">13 · 并发症 & Fig.3</span>
+        <span class="src">Complications</span>
+      </div>
+      <h2 class="section">"轻度复发"自愈过程的真实记录</h2>
+      <h3 class="subtitle">Fig. 3 a–c · 新法组 1 例患者，疼痛压痛后 6 月自行缓解</h3>
+
+      <div class="grid grid-2">
+        <div class="imgplate">
+          <img src="images/img_3.jpg" alt="新法术后随访 Fig.3 a-c"/>
+          <div class="cap">Fig. 3 a：术后即刻 · b：1 月疼痛压痛 · c：6 月自行缓解</div>
+        </div>
+        <div class="card">
+          <div class="label">3.1 · 并发症</div>
+          <h3>两组均无严重并发症</h3>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li>新法组 9 例"复发"中 4 例<strong>自行缓解</strong></li>
+            <li>5 例<strong>浆液性渗出</strong>经口服抗生素治愈</li>
+            <li>新法组 <strong>0 例</strong>需要二次手术</li>
+            <li>传统组 <strong>6 例</strong>需要二次手术</li>
+            <li>其他患者：抗炎、抬高、加压包扎即可</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid grid-3" style="margin-top: 18px;">
+        <div class="card good">
+          <div class="label">新法 · 复发的本质</div>
+          <h3>症状 vs 结构</h3>
+          <p>少数患者有<strong>短暂疼痛压痛</strong>，但甲板形态良好，无需再次手术 —— <strong>症状可逆</strong>。</p>
+        </div>
+        <div class="card warn">
+          <div class="label">传统法 · 复发的本质</div>
+          <h3>结构性再生</h3>
+          <p>新生甲再次嵌入甲襞，需<strong>再次手术</strong>切除，<strong>结构性问题</strong>。</p>
+        </div>
+        <div class="card accent">
+          <div class="label">启示</div>
+          <h3>复发定义应分层</h3>
+          <p>未来研究应<strong>区分"症状性复发"和"结构性复发（需手术）"</strong>。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 16: Discussion ============ -->
+  <section class="slide" data-title="讨论">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">14 · 讨论</span>
+        <span class="src">Discussion</span>
+      </div>
+      <h2 class="section">与现有文献的横向比较</h2>
+      <h3 class="subtitle">新法组的 14.1% 复发率处于已报告范围的中段</h3>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="label">复发率历史数据</div>
+          <h3>文献对照</h3>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li>Kayalar 2011（Winograd）：<strong>9.8%</strong></li>
+            <li>Guler 2015（Winograd）：<strong>9.4%</strong></li>
+            <li>Ince 2015（打结法）：≤ 20%</li>
+            <li>本 RCT 传统组：<strong>33.3%</strong>（偏高）</li>
+            <li>本 RCT 新法组：<strong>14.1%</strong>（中段）</li>
+          </ul>
+        </div>
+        <div class="card accent">
+          <div class="label">作者观点</div>
+          <h3>为何新法更好？</h3>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li class="green">Winograd 法不切甲襞是复发原因之一</li>
+            <li class="green">本研究两组均<strong>切除部分甲床 + 甲襞</strong></li>
+            <li class="green">差别仅在"皮瓣最终位置"</li>
+            <li class="green">新法让甲板<strong>失去嵌入空间</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid grid-2" style="margin-top: 18px;">
+        <div class="card teal">
+          <div class="label">复工时间反而更长？</div>
+          <h3>研究者自己的解释</h3>
+          <p>两组均鼓励<strong>尽早复工</strong>，但平均复工时间仍<strong>长于既往报告</strong>（既往 12–14 天，本研究 18 天）。可能与<strong>宣教力度不足</strong>有关，并非手术本身差异。</p>
+        </div>
+        <div class="card warn">
+          <div class="label">与年龄无关</div>
+          <h3>复发 = 缝合问题</h3>
+          <p>青少年 vs 成人的复发率（23.6% vs 23.2%, p = 0.953）与满意度均<strong>无差异</strong>。说明本研究差异来自<strong>缝合法</strong>，而非年龄。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 17: Strengths & Limits ============ -->
+  <section class="slide" data-title="优缺点">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">15 · 优点 / 局限 / 启示</span>
+        <span class="src">Strengths · Limits · Implications</span>
+      </div>
+      <h2 class="section">如何把这篇 RCT 用到我们科</h2>
+      <h3 class="subtitle">方法学优势明显，但仍有改进空间</h3>
+
+      <div class="grid grid-3">
+        <div class="card good">
+          <div class="label">✓ 优点</div>
+          <h3>Strengths</h3>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li class="green">前瞻性 + 随机 + 对照</li>
+            <li class="green">样本量充足（n=128）</li>
+            <li class="green">覆盖青少年与成人</li>
+            <li class="green">干预因素"非常纯"</li>
+            <li class="green">随访 ≥ 12 月</li>
+          </ul>
+        </div>
+        <div class="card warn">
+          <div class="label">⚠ 局限</div>
+          <h3>Limits</h3>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li class="red">部分数据电话采集</li>
+            <li class="red">未量化外观评分</li>
+            <li class="red">满意度评估粗糙</li>
+            <li class="red">性别分布失衡（已分层处理）</li>
+            <li class="red">未做术者一致性评估</li>
+          </ul>
+        </div>
+        <div class="card accent">
+          <div class="label">💡 对科室的启示</div>
+          <h3>Take-aways</h3>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li class="teal">"皮瓣位置"值得尝试</li>
+            <li class="teal">复发定义需要分层</li>
+            <li class="teal">满意度应量化评分</li>
+            <li class="teal">建立术前后照片档案</li>
+            <li class="teal">未来可做多中心 RCT</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top: 18px;" class="card teal">
+        <div class="label">一句话总结方法学</div>
+        <h3>"对照纯、终点明、可重复"——一篇值得临床借鉴的研究</h3>
+        <p>仅改变缝合方式一个变量、其余步骤完全一致 —— 这种<strong>"单变量 RCT"</strong>是临床研究的好范式。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 18: Conclusion ============ -->
+  <section class="slide" data-title="结论">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">16 · 结论</span>
+        <span class="src">Conclusion</span>
+      </div>
+      <h2 class="section">结论 & 一句话</h2>
+      <h3 class="subtitle">Conclusions from the authors</h3>
+
+      <div class="takeaway" style="margin-bottom: 20px;">
+        <h3>作者原文结论</h3>
+        <p>Our new technique was associated with <strong>greater satisfaction of, and lower recurrence rates in, youths and adults</strong>, but did not seem to reduce the times taken to return to work/school or to wear shoes once more.</p>
+      </div>
+
+      <div class="grid grid-4">
+        <div class="metric">
+          <div class="k">复发率</div>
+          <div class="v" style="color: var(--good);">↓</div>
+          <div class="sub">14.1% vs 33.3%（p = 0.011）</div>
+        </div>
+        <div class="metric">
+          <div class="k">满意度</div>
+          <div class="v" style="color: var(--good);">↑</div>
+          <div class="sub">87.5% 高满意 vs 73.3%（p = 0.042）</div>
+        </div>
+        <div class="metric">
+          <div class="k">复工 / 复学</div>
+          <div class="v" style="color: var(--warn);">≈</div>
+          <div class="sub">18.0 vs 15.8 天（p = 0.015，略长）</div>
+        </div>
+        <div class="metric">
+          <div class="k">穿鞋时间</div>
+          <div class="v" style="color: var(--muted);">≈</div>
+          <div class="sub">15.8 vs 16.4 天（p = 0.537）</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;" class="card accent">
+        <div class="label">临床一句话</div>
+        <h3>"塞皮瓣于甲下" —— 一针之间降低复发</h3>
+        <p>Winograd 术后用<strong>改良缝合</strong>把甲襞皮肤置于甲板<strong>下方</strong>，相比传统缝合可显著<strong>降低复发、提高满意度</strong>，且不延迟穿鞋时间。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Slide 19: References ============ -->
+  <section class="slide" data-title="参考文献">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">17 · 参考文献</span>
+        <span class="src">References</span>
+      </div>
+      <h2 class="section">主要参考文献（节选）</h2>
+      <h3 class="subtitle">完整 17 条参考文献见原文 · Foot Ankle Int / J Foot Ankle Surg / Dermatol Surg 等</h3>
+
+      <ol class="refs">
+        <li><strong>[9] Uygur E.</strong> A new and simple suture technique after ingrown toenail. <em>Surg Tech Orthop.</em> 2014;29:165–166. <em>← 本改良缝合法的首次报告</em></li>
+        <li><strong>[2] Kayalar M, Bal E, Toros T, et al.</strong> Results of partial matrixectomy for chronic ingrown toenail. <em>Foot Ankle Int.</em> 2011;32:888–895. (Winograd 复发 9.8%)</li>
+        <li><strong>[1] Guler O, Tuna H, Mahirogullari M, et al.</strong> Nail braces as an alternative treatment for ingrown toenails. <em>J Foot Ankle Surg.</em> 2015;54:620–624.</li>
+        <li><strong>[5] Huang JZ, Zhang YJ, Ma X, et al.</strong> Comparison of wedge resection (Winograd) and wedge resection plus complete nail plate avulsion. <em>J Foot Ankle Surg.</em> 2015;54:395–398.</li>
+        <li><strong>[6] Kuru I, Sualp T, Ferit D, Gunduz T.</strong> Factors affecting recurrence rate of ingrown toenail treated with marginal toenail ablation. <em>Foot Ankle Int.</em> 2004;25:410–413.</li>
+        <li><strong>[8] Winograd AM.</strong> A modification in the technic of operation for ingrown toenail. 1929. <em>Am Podiatr Med Assoc.</em> 2007;97:274–277. <em>← 经典原始文献</em></li>
+        <li><strong>[10] Heifetz CJ.</strong> Operative management of ingrown toenail. <em>Mo Med.</em> 1945;42:213–216. <em>← Heifetz 分期出处</em></li>
+        <li><strong>[12] Ince B, Dadacı M, Bilgen F, Yarar S.</strong> Comparison between knot and Winograd techniques on ingrown nail treatment. <em>Acta Orthop Traumatol Turc.</em> 2015;49:539–543.</li>
+        <li><strong>[14] Aydin N, Kocaoglu B, Esemenli T.</strong> Partial removal of nail matrix in the treatment of ingrowing toe nail. <em>Acta Orthop Traumatol Turc.</em> 2008;42:174–177.</li>
+        <li><strong>[15] Isik C, Cakici H, Kose KC, Goksugur N.</strong> Comparison of partial matrixectomy and combination treatment (partial matrixectomy + phenol). <em>Med Glas (Zenica).</em> 2013;10:81–85.</li>
+        <li><strong>[16] Korkmaz M, Colgeçen E, Erdoğan Y, et al.</strong> Teenage patients with ingrown toenails. <em>Indian J Dermatol.</em> 2013;58:327.</li>
+        <li><strong>[17] Noel B.</strong> Surgical treatment of ingrown toenail without matricectomy. <em>Dermatol Surg.</em> 2008;34:79–83.</li>
+        <li><strong>[3] Haneke E.</strong> Controversies in the treatment of ingrown nails. <em>Dermatol Res Pract.</em> 2012;2012:783924.</li>
+        <li><strong>[4] Kose O, Guler F, Gurcan S, et al.</strong> Cosmetic results of wedge resection of nail matrix (Winograd technique). <em>Foot Ankle Spec.</em> 2012;5:241–244.</li>
+        <li><strong>[7] Tsunoda M, Tsunoda K.</strong> Patient-controlled taping for the treatment of ingrown toenails. <em>Ann Fam Med.</em> 2014;12:553–555.</li>
+        <li><strong>[11] Imai A, Takayama K, Satoh T, et al.</strong> Ingrown nails and pachyonychia of the great toes impair lower limb functions. <em>Int J Dermatol.</em> 2011;50:215–220.</li>
+        <li><strong>[13] Pettine KA, Cofield RH, Johnson KA, Bussey RM.</strong> Ingrown toenail: results of surgical treatment. <em>Foot Ankle.</em> 1988;9:130–134.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ Slide 20: Thank you ============ -->
+  <section class="slide cover" data-title="致谢">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="tag">18 · 致谢 & 讨论</span>
+        <span class="src">Q &amp; A</span>
+      </div>
+      <h1 class="title">谢谢聆听，欢迎<span class="em">讨论</span></h1>
+      <h3 class="subtitle">Discussion · 改良缝合法对甲沟炎术后复发的临床价值</h3>
+
+      <div class="meta">
+        <div class="pill"><strong>文献</strong>：Uygur 2016, IJS</div>
+        <div class="pill"><strong>样本</strong>：n = 128 / 完成 124</div>
+        <div class="pill"><strong>核心</strong>：复发 14.1% vs 33.3%</div>
+        <div class="pill"><strong>类型</strong>：RCT</div>
+      </div>
+
+      <div class="quote">
+        三个值得在科内讨论的问题：
+        <br/><br/>
+        ① 你的甲沟炎病例中，<strong>传统缝合后的复发率</strong>大约是多少？
+        <br/>② 你是否愿意尝试这种"皮瓣塞入甲下"的缝合法？
+        <br/>③ 我们科是否需要建立<strong>统一的"复发"定义</strong>，以便今后多中心汇总？
+      </div>
+
+      <div class="footer-tip">
+        <span>← / → 翻页 · 空格下一页 · Home / End 跳转首末页</span>
+        <span>© 王海生 · 甲沟炎文献解读 · 2026</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Navigation controls -->
+<div class="nav-edge left" id="prevBtn" title="上一页 (←)">‹</div>
+<div class="nav-edge right" id="nextBtn" title="下一页 (→)">›</div>
+<div class="nav">
+  <button id="firstBtn" title="首页 (Home)">⏮</button>
+  <button id="prevBtn2" title="上一页 (←)">‹</button>
+  <span class="counter" id="counter">1 / 20</span>
+  <button id="nextBtn2" title="下一页 (→)">›</button>
+  <button id="lastBtn" title="末页 (End)">⏭</button>
+</div>
+
+<script>
+  (function () {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const total = slides.length;
+    const counter = document.getElementById('counter');
+    let idx = 0;
+
+    function show(i) {
+      idx = Math.max(0, Math.min(total - 1, i));
+      slides.forEach((s, n) => {
+        s.classList.remove('active', 'prev');
+        if (n === idx) s.classList.add('active');
+        else if (n < idx) s.classList.add('prev');
+      });
+      counter.textContent = (idx + 1) + ' / ' + total;
+      // Update URL hash for sharing
+      try { history.replaceState(null, '', '#' + (idx + 1)); } catch (e) {}
+    }
+
+    function next() { show(idx + 1); }
+    function prev() { show(idx - 1); }
+    function first() { show(0); }
+    function last() { show(total - 1); }
+
+    // Public method for onclick
+    window.go = show;
+
+    // Buttons
+    document.getElementById('prevBtn').addEventListener('click', prev);
+    document.getElementById('nextBtn').addEventListener('click', next);
+    document.getElementById('prevBtn2').addEventListener('click', prev);
+    document.getElementById('nextBtn2').addEventListener('click', next);
+    document.getElementById('firstBtn').addEventListener('click', first);
+    document.getElementById('lastBtn').addEventListener('click', last);
+
+    // Keyboard
+    document.addEventListener('keydown', function (e) {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      switch (e.key) {
+        case 'ArrowRight':
+        case 'PageDown':
+        case ' ':
+          e.preventDefault(); next(); break;
+        case 'ArrowLeft':
+        case 'PageUp':
+          e.preventDefault(); prev(); break;
+        case 'Home': first(); break;
+        case 'End':  last();  break;
+      }
+    });
+
+    // Touch
+    let tx = 0;
+    document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive: true});
+    document.addEventListener('touchend',   e => {
+      const dx = e.changedTouches[0].clientX - tx;
+      if (Math.abs(dx) > 40) (dx < 0 ? next : prev)();
+    }, {passive: true});
+
+    // Wheel
+    let wheelLock = 0;
+    document.addEventListener('wheel', function (e) {
+      const now = Date.now();
+      if (now < wheelLock) return;
+      if (Math.abs(e.deltaY) < 30) return;
+      wheelLock = now + 600;
+      (e.deltaY > 0 ? next : prev)();
+    }, {passive: true});
+
+    // Initial from hash
+    const h = parseInt(location.hash.replace('#',''), 10);
+    if (!isNaN(h) && h >= 1 && h <= total) show(h - 1);
+  })();
+</script>
+</body>
+</html>
