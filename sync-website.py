@@ -11,7 +11,9 @@ sync-website.py — 网站同步引擎（08_Website 为唯一源头）
 本引擎做三件事:
   A. 规范化 08_Website（原地，幂等，可反复跑）:
      - images/ 下图片文件名统一 slug 化小写（与 Quartz 构建产物一致）
-     - md 里 wikilink/库内全路径/URL编码 的图片引用 -> 相对路径 images/xxx.jpg
+     - md 里 Obsidian 插图写法自动转换（"图片链接自动转换器"）:
+       ![[图片]] / ![[图片|300]] / ![[图片#^块]] / 库内全路径 / URL编码
+       -> 标准相对路径 images/xxx.jpg；图片全 vault 按名搜索并自动复制进来
      - 跨文件夹引用的图片自动复制进本文件夹 images/（每篇文章自包含）
      - md 里相对 .htm 链接 -> 按 slugify 规则的绝对最终 URL
      - htm 里资源引用与 images/ 实际文件名对齐（小写）
@@ -198,6 +200,7 @@ def import_image_to_folder(folder, abs_src):
 
 # ---------- md / htm 引用改写 ----------
 
+IMG_EXTS = (".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".bmp", ".avif")
 IMG_REF_MD = re.compile(r"(!\[[^\]]*\]\()([^)]+)(\))")
 WIKILINK_EMBED = re.compile(r"(!\[\[)([^\]|]+)(?:\|([^\]]*))?(\]\])")
 MD_HTM_LINK = re.compile(r"\]\(([^):]+\.html?)\)", re.IGNORECASE)
@@ -217,6 +220,13 @@ def resolve_image_ref(folder, raw):
         hit = case_insensitive_find(folder, raw_dec)
         if hit:
             return hit
+        # 1.5) 文件在文章文件夹根目录（不在 images/）-> 收编进 images/
+        try:
+            for e in os.listdir(folder):
+                if e.lower() == raw_dec.lower() and os.path.isfile(os.path.join(folder, e)):
+                    return import_image_to_folder(folder, os.path.join(folder, e))
+        except OSError:
+            pass
     # 2) 引用里含 images/ 取 basename
     base = os.path.basename(raw_dec)
     hit = case_insensitive_find(folder, base)
@@ -248,13 +258,23 @@ def normalize_md(folder, rel_folder, fn):
     def sub_wikilink(m):
         target = m.group(2).strip()
         alias = m.group(3)
-        hit = resolve_image_ref(folder, target)
+        # 剥离标题/块引用：img.jpg#heading / img.jpg#^blockid
+        core = target.split("#", 1)[0].strip()
+        if not core:
+            return m.group(0)  # ![[#section]] 自身嵌入，不处理
+        # 非图片嵌入（笔记/PDF 等附件）不做转换，也不告警
+        if os.path.splitext(core)[1].lower() not in IMG_EXTS:
+            return m.group(0)
+        # 数字别名 = Obsidian 尺寸语法（|300 / |300x200），Quartz 不支持，丢弃
+        if alias and re.fullmatch(r"\d+(x\d+)?", alias.strip()):
+            alias = None
+        hit = resolve_image_ref(folder, core)
         if hit == "KEEP":
             return m.group(0)
         if hit:
             alt = alias or os.path.splitext(hit)[0]
             return "![%s](images/%s)" % (alt, hit)
-        warnings.append("未解析 wikilink 引用: %s/%s -> ![[%s]]" % (rel_folder, fn, target[:80]))
+        warnings.append("未解析 wikilink 引用: %s/%s -> ![[%s]]" % (rel_folder, fn, core[:80]))
         return m.group(0)
 
     def sub_img(m):

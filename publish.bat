@@ -7,11 +7,11 @@ echo Publish haysonwang.com
 echo ============================
 echo.
 echo 栏目: 甲病专题 / 健康教育 / 临床实践 / 医学研究
-echo 状态: 扁平化目录 + 共享 images/ 文件夹
+echo 插图: Obsidian ![[图片]] 写法发布时自动转为相对路径
 echo ============================
 
 echo.
-echo [1/3] Syncing website content...
+echo [1/3] Syncing website content (wikilink 图片自动转换)...
 cd /d E:\Website\quartz
 
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0sync-content.ps1" -NoPause
