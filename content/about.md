@@ -1,5 +1,5 @@
 ---
-title: 关于我
+title: 关于我 About Me
 ---
 
 <style>
@@ -247,14 +247,3 @@ title: 关于我
     获取手足踝健康科普、甲沟炎防治知识<br>
     及最新诊疗资讯
   </p>
-
-  <div class="wechat-hint">
-    <span class="step">点击<span class="highlight">"服务"</span></span>
-    <span class="arrow">→</span>
-    <span class="step">选择<span class="highlight">"我要咨询"</span></span>
-    <span class="arrow">→</span>
-    <span class="step">跳转<span class="highlight">京东互联网医院</span></span>
-  </div>
-</div>
-
-</div>
