@@ -31,15 +31,15 @@ title: 随访系统 FollowUp
 <div class="followup-entry">
   <h2>🩺 随访管理系统</h2>
   <p>患者随访与术后管理平台（FollowUp System）。点击下方按钮，或直接在左侧目录点击「随访系统」即可进入。</p>
-  <a class="followup-btn" href="https://followup.haysonwang.com" target="_blank" rel="noopener">进入随访系统 →</a>
+  <a class="followup-btn" href="http://43.142.55.206/doctor" target="_blank" rel="noopener">进入随访系统 →</a>
   <p class="followup-hint">提示：系统部署在独立服务器，将以新标签页打开。</p>
 </div>
 
 <script>
-  // https -> https 同源跳转，浏览器允许；若被拦截，上方按钮仍可手动进入
+  // 跳转到随访系统独立服务器（IP 直连），新标签页打开；若被拦截，上方按钮仍可手动进入
   window.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
-      window.location.href = 'https://followup.haysonwang.com';
+      window.location.href = 'http://43.142.55.206/doctor';
     }, 600);
   });
 </script>
